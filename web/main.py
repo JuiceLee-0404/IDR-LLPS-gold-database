@@ -26,6 +26,10 @@ ml_results_dir = ROOT_DIR / "ml_dl" / "results"
 if ml_results_dir.exists():
     app.mount("/ml_results", StaticFiles(directory=ml_results_dir), name="ml_results")
 
+data_dir = ROOT_DIR / "data"
+if data_dir.exists():
+    app.mount("/data", StaticFiles(directory=data_dir), name="data")
+
 templates = Jinja2Templates(directory=str(ROOT_DIR / "web" / "templates"))
 
 

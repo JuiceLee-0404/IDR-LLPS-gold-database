@@ -3,7 +3,7 @@ services:
     name: idr-llps-web
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: uvicorn web.main:app --host 0.0.0.0 --port 10000
+    startCommand: uvicorn web.main:app --host 0.0.0.0 --port $PORT
     plan: free
     envVars:
       - key: PYTHONUNBUFFERED
