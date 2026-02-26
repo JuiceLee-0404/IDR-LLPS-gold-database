@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}IDR-LLPS Database{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-8">
+      <h1 class="mb-3">IDR-LLPS Database Web Portal</h1>
+      <p>
+        本页面提供你当前项目中整理的 IDR–LLPS 数据集的一个可视化入口，包括：
+      </p>
+      <ul>
+        <li>按条件浏览样本（正/负/伪负等标签）；</li>
+        <li>查看单个样本的详细注释与 NARDINI90 特征；</li>
+        <li>浏览统计图与机器学习（ML/深度学习）结果；</li>
+        <li>下载 SQLite / TSV / 机器学习输出等文件。</li>
+      </ul>
+      <p>
+        使用上方导航栏进入不同功能页面。后续可以根据需要继续扩展搜索、相似样本推荐等功能。
+      </p>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          快速链接
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <a href="/samples">Browse samples</a>
+          </li>
+          <li class="list-group-item">
+            <a href="/plots">View plots &amp; ML results</a>
+          </li>
+          <li class="list-group-item">
+            <a href="/downloads">Download data</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+

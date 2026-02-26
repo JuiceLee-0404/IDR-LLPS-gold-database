@@ -1,0 +1,17 @@
+{
+  "n_samples": 2999,
+  "n_features": 90,
+  "group_counts": {
+    "neg_pseudo": 1588,
+    "neg": 1025,
+    "pos": 386
+  },
+  "pca_explained_variance_ratio": [
+    0.10059979487091018,
+    0.06958734340599051
+  ],
+  "kmeans_k": 3,
+  "ari_group_vs_kmeans": 0.07218707273530203,
+  "nmi_group_vs_kmeans": 0.09214202778597584,
+  "silhouette_kmeans": 0.07593988152012175
+}

@@ -1,0 +1,1718 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <!-- DW6 -->
+    <head>
+        <!-- Copyright 2005 Macromedia, Inc. All rights reserved. -->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <TITLE>DrLLPS - Data resource of LLPS</TITLE>
+<link   rel= "shortcut   icon "   href= "images/GPS.png "/> 
+        <link rel="stylesheet" href="stylegreen.css" type="text/css" />
+        <link rel="stylesheet" href="js/lavalamp/lavalamp_test.css" type="text/css" media="screen"/>
+        <link rel="stylesheet" href="css.css" type="text/css" />
+        
+		<script type="text/javascript" src="js/lavalamp/jquery-1.2.3.min.js"></script>
+        <script type="text/javascript" src="js/lavalamp/jquery.easing.min.js"></script>
+        <script type="text/javascript" src="js/lavalamp/jquery.lavalamp.js"></script>
+    <!--    <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>  -->
+		
+		<script type="text/JavaScript" src="js/curvycorners.src.js"></script>
+		
+		<script language="javascript">
+
+		var num = 1;
+
+		function addDiv()
+		{
+			var thenew= document.createElement('div');
+			
+			thenew.id = "div" + num;
+			
+			thenew.style.width = "640px";
+			
+			thenew.style.paddingTop = "10px";
+			
+			thenew.style.paddingBottom = "10px";
+			//
+			var newSelectOption = document.createElement("select");
+			
+			newSelectOption.id = "tagOption" + num;
+			
+			newSelectOption.name = "tagOption" + num;
+			
+			newSelectOption.style.marginRight= "10px";
+			
+			newSelectOption.options.add(new Option("AND ","and")); 
+			
+			newSelectOption.options.add(new Option("OR ","or"));
+			
+			newSelectOption.options.add(new Option("NOT ","and not")); 
+						
+			thenew.appendChild(newSelectOption);
+			
+			//
+			var newSelect = document.createElement("select");
+			
+			newSelect.id = "tag" + num;
+			
+			newSelect.name = "tag" + num;
+			
+			newSelect.style.marginRight= "10px";
+			
+			newSelect.options.add(new Option("DrLLPS ID","iEKPD_ID"));
+			
+			newSelect.options.add(new Option("Ensemble Gene ID","EnsemblID"));
+			
+			newSelect.options.add(new Option("UniProt Accession","UniProtID"));
+			
+			// newSelect.options.add(new Option("Protein Name/Alias","pname"));
+			
+			newSelect.options.add(new Option("Gene Name/Alias","GeneName"));
+			
+			newSelect.options.add(new Option("Species","Species"));
+			
+			// newSelect.options.add(new Option("Group","cgroup"));
+			
+			newSelect.options.add(new Option("Condensate","Type"));
+			
+			thenew.appendChild(newSelect);
+
+			//
+			var newInput = document.createElement("input");
+			
+			newInput.id = "input" + num;
+			
+			newInput.name = "input" + num;
+			
+			newInput.type = "text";
+			
+			newInput.style.width = "300px";
+			
+			newInput.style.marginRight= "10px";
+			
+			thenew.appendChild(newInput);
+			
+			//
+			var newAdd = document.createElement("input");
+			
+			newAdd.id = "add" + num;
+			
+			newAdd.name = "add" + num;
+			
+			newAdd.type = "button";
+			
+			newAdd.style.marginRight= "10px";
+			
+			newAdd.value = " + ";
+			
+			if(newAdd.attachEvent){
+			
+				newAdd.attachEvent( "onclick", addDiv);
+				
+			}else{
+			
+				newAdd.addEventListener( 'click',addDiv);
+			}
+					
+			thenew.appendChild(newAdd);
+			
+			//
+			var newDel = document.createElement("input");
+			
+			newDel.id = "del" + num;
+			
+			newDel.name = "del" + num;
+			
+			newDel.type = "button";
+			
+			newDel.value = " - ";
+					
+			if(newDel.attachEvent){
+			
+				newDel.attachEvent( "onclick", delDiv);
+				
+			}else{
+			
+				newDel.addEventListener( 'click',delDiv);
+			}
+					
+			thenew.appendChild(newDel);
+
+			//
+			document.getElementById('bbbb').appendChild(thenew);
+
+			num = num + 1;
+
+			document.getElementById('num').value=num;
+
+		}
+		function delDiv()
+		{
+			//document.getElementById('bbbb').removeChild(document.getElementById('bbbb').childNodes[1]);
+			var node = document.getElementById('div' + (num-1));
+
+			document.getElementById('bbbb').removeChild(node);
+
+			num  = num -1;
+            document.getElementById('num').value=num;
+		}
+
+		function resetNum(){
+
+			document.getElementById('num').value  = 1;
+
+			return true;
+		}
+		</script>
+		<script type="text/javascript">
+		$().ready(function(){
+		$("td#myLabel").hover(function(){
+		$('.txt').html($(this).children('.content').html());
+		},
+		function(){
+		$('.txt').html($(this).children('.content').html());
+		});
+		});
+		</script>
+		<script type="text/javascript">
+			function showDiv(nodeid){		
+				var hdiv = document.getElementById(nodeid);
+				var hdiv2 = document.getElementById("txt");
+				hdiv2.innerHTML = hdiv.innerHTML;
+			}
+			function hideDiv(){
+				var hdiv = document.getElementById("txt");
+				hdiv.style.display = "none";
+			}
+		</script>
+		<script language="JavaScript" type="text/JavaScript"> 
+		function display(t){
+		   var p=document.all(t); //声明一个变�?
+		   p.style.display=p.style.display=="none"?"":"none"; //判断是否隐藏
+		}
+		</script>
+		<script type="text/javascript">
+			//search 搜索结果界面
+			$(document).ready(function(){
+			$("div.flip").click(function(){
+				$(this).parent().children("div.panel").slideToggle(2000);
+			  });
+			});
+		</script>
+		<script type="text/javascript">
+			//点击弹出层，download下载选项
+			function showid(idname){
+			var isIE = (document.all) ? true : false;
+			var isIE6 = isIE && ([/MSIE (\d)\.0/i.exec(navigator.userAgent)][0][1] == 6);
+			var newbox=document.getElementById(idname);
+			newbox.style.zIndex="9999";
+			newbox.style.display="block"
+			newbox.style.position = !isIE6 ? "fixed" : "absolute";
+			newbox.style.top =newbox.style.left = "50%";
+			newbox.style.marginTop = - newbox.offsetHeight / 2 + "px";
+			newbox.style.marginLeft = - newbox.offsetWidth / 2 + "px";
+			var layer=document.createElement("div");
+			layer.id="layer";
+			layer.style.width=layer.style.height="100%";
+			layer.style.position= !isIE6 ? "fixed" : "absolute";
+			layer.style.top=layer.style.left=0;
+			layer.style.backgroundColor="#000";
+			layer.style.zIndex="9998";
+			layer.style.opacity="0.6";
+			document.body.appendChild(layer);
+			var sel=document.getElementsByTagName("select");
+			for(var i=0;i<sel.length;i++){
+			sel[i].style.visibility="hidden";
+			}
+			function layer_iestyle(){
+			layer.style.width=Math.max(document.documentElement.scrollWidth, document.documentElement.clientWidth)
+			+ "px";
+			layer.style.height= Math.max(document.documentElement.scrollHeight, document.documentElement.clientHeight) +
+			"px";
+			}
+			function newbox_iestyle(){
+			newbox.style.marginTop = document.documentElement.scrollTop - newbox.offsetHeight / 2 + "px";
+			newbox.style.marginLeft = document.documentElement.scrollLeft - newbox.offsetWidth / 2 + "px";
+			}
+			if(isIE){layer.style.filter ="alpha(opacity=60)";}
+			if(isIE6){
+			layer_iestyle()
+			newbox_iestyle();
+			window.attachEvent("onscroll",function(){
+			newbox_iestyle();
+			})
+			window.attachEvent("onresize",layer_iestyle)
+			}
+			layer.onclick=function(){newbox.style.display="none";layer.style.display="none";for(var i=0;i<sel.length;i++){
+			sel[i].style.visibility="visible";
+			}}
+			}
+		</script>
+        <script type="text/javascript">
+            $(function() {
+                $("#gbnav").lavaLamp({
+                    fx: "backout",
+                    speed: 700,
+                    click: function(event, menuItem) {
+                        return true;
+                    }
+                });
+            });
+        </script>
+        <link href="js/accordion-menu/styleacc.css" type="text/css" rel="stylesheet"/>
+        <script type="text/javascript">
+            /*$(document).ready(function()
+                {
+                        //slides the element with class "menu_body" when paragraph with class "menu_head" is clicked
+                        $("#firstpane p.menu_head").click(function()
+                    {
+                                $(this).css({backgroundImage:"url(js/accordion-menu/down.png)"}).next("div.menu_body").slideToggle(300).siblings("div.menu_body").slideUp("slow");
+                        $(this).siblings("p").css({backgroundImage:"url(js/accordion-menu/left.png)"});
+                        });
+
+                });*/
+
+            $(document).ready(function()
+            {
+                //slides the element with class "menu_body" when paragraph with class "menu_head" is mouseover
+                $(".menu_body a").hover(function()
+                {
+                    $(".navintro").css({display:"none"});
+                    $(this).siblings(".navintro").css({display:"block"}).fadeIn("slow");
+
+                });
+            });
+
+        </script>
+        <script src="js/jquery.treeview/jquery.treeview.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#leftcontent img").click(function() {
+
+                    $(this).next().next().css("display","none");
+                });
+
+            })
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $("#browser").treeview({
+                    toggle: function() {
+                        console.log("%s was toggled.", $(this).find(">span").text());
+                    }
+                });
+
+                $("#add").click(function() {
+                    var branches = $("<li><span class='folder'>New Sublist</span><ul>" +
+                        "<li><span class='file'>Item1</span></li>" +
+                        "<li><span class='file'>Item2</span></li></ul></li>").appendTo("#browser");
+                    $("#browser").treeview({
+                        add: branches
+                    });
+                });
+            });
+        </script>
+        <script type="text/javascript">
+            function wsug(e, str){
+                var oThis = arguments.callee;
+                if(!str) {
+                    oThis.sug.style.visibility = 'hidden';
+                    document.onmousemove = null;
+                    return;
+                }
+                if(!oThis.sug){
+                    var div = document.createElement('div'), css = 'top:0; left:0; position:absolute; z-index:100; visibility:hidden';
+                    div.style.cssText = css;
+                    div.setAttribute('style',css);
+                    var sug = document.createElement('div'), css= 'font:normal 12px/16px "宋体";font-family:Arial; white-space:nowrap; color:#666; padding:3px; position:absolute; left:0; top:0; z-index:10; background:#f9fdfd; border:1px solid #0aa';
+                    sug.style.cssText = css;
+                    sug.setAttribute('style',css);
+                    var dr = document.createElement('div'), css = 'position:absolute; top:3px; left:3px; background:#333; filter:alpha(opacity=50); opacity:0.5; z-index:9';
+                    dr.style.cssText = css;
+                    dr.setAttribute('style',css);
+                    var ifr = document.createElement('iframe'), css='position:absolute; left:0; top:0; z-index:8; filter:alpha(opacity=0); opacity:0';
+                    ifr.style.cssText = css;
+                    ifr.setAttribute('style',css);
+                    div.appendChild(ifr);
+                    div.appendChild(dr);
+                    div.appendChild(sug);
+                    div.sug = sug;
+                    document.body.appendChild(div);
+                    oThis.sug = div;
+                    oThis.dr = dr;
+                    oThis.ifr = ifr;
+                    div = dr = ifr = sug = null;
+                }
+                var e = e || window.event, obj = oThis.sug, dr = oThis.dr, ifr = oThis.ifr;
+                obj.sug.innerHTML = str;
+
+                var w = obj.sug.offsetWidth, h = obj.sug.offsetHeight, dw = document.documentElement.clientWidth||document.body.clientWidth; dh = document.documentElement.clientHeight || document.body.clientHeight;
+                var st = document.documentElement.scrollTop || document.body.scrollTop, sl = document.documentElement.scrollLeft || document.body.scrollLeft;
+                var left = e.clientX +sl +17 + w < dw + sl  &&  e.clientX + sl + 15 || e.clientX +sl-8 - w, top = e.clientY + st + 17;
+                obj.style.left = left+ 10 + 'px';
+                obj.style.top = top + 10 + 'px';
+                dr.style.width = w + 'px';
+                dr.style.height = h + 'px';
+                ifr.style.width = w + 3 + 'px';
+                ifr.style.height = h + 3 + 'px';
+                obj.style.visibility = 'visible';
+                document.onmousemove = function(e){
+                    var e = e || window.event, st = document.documentElement.scrollTop || document.body.scrollTop, sl = document.documentElement.scrollLeft || document.body.scrollLeft;
+                    var left = e.clientX +sl +17 + w < dw + sl  &&  e.clientX + sl + 15 || e.clientX +sl-8 - w, top = e.clientY + st +17 + h < dh + st  &&  e.clientY + st + 17 || e.clientY + st - 5 - h;
+                    obj.style.left = left + 'px';
+                    obj.style.top = top + 'px';
+                }
+            }
+        </script>
+        <link rel="stylesheet" href="js/jquery.treeview/jquery.treeview.css" />
+        <style type="text/css">
+
+            .STYLE1 {font-size: 12px}
+            .STYLE2 {color: #000000}
+
+
+            .lavaLampWithImage  li a:link{text-decoration:none ; color: #ff7373;}
+            .lavaLampWithImage  li    a:visited {text-decoration:none ; color: #ff7373;}
+            .lavaLampWithImage  li   a:hover {text-decoration:none ; color: rgba(0, 0, 0, 0.96);}
+            .lavaLampWithImage  li    a:active {text-decoration:none ; color: #1a1a1a;}
+
+			 .STYLE5 {
+                color: #ff9191;
+                font-style: italic;
+            }
+        </style>
+    </head>
+    <!-- The structure of this file is exactly the same as 2col_rightNav.html;
+             the only difference between the two is the stylesheet they use -->
+    <body>
+<div id="container">
+    <div id="header">
+        <div id="masthead">
+                                <div class="logo"> <a href="#"><img src="images/logo.png" width="157" height="147" border="0" /></a> </div>
+					<div style="margin-left:150px;">
+						<div class="namebanner">
+					
+							<img align = "center" src="images/EKPD.jpg" width ="980px" height="94px" border="0"  />
+						</div>
+						<div class="banner" ><img src="images/EKPD.gif" width="920" height ="74px" border="0"  /></div>
+					</div>
+            <div id="globalNav">
+                <ul class="lavaLampWithImage" id="gbnav">
+                    <li><a href="index.php" style="width:110px">HOME</a></li>
+
+                    <li><a href="browse.php" style="width:130px">BROWSE</a></li>
+                    <li><a href="advance.php" style="width:80px">SEARCH</a></li>
+
+                    <li  class="current"><a href="download.php" style="width:160px">DOWNLOAD</a></li>
+
+                    <li><a href="guide.php" style="width:110px">USER GUIDE</a></li>
+                    <li><a href="link.php" style="width:110px">LINK</a></li>
+
+                    <li><a href="Contact.php" style="width:110px">CONTACT</a></li>
+
+
+                </ul>
+                <!-- <ul>
+                             <li><a href="{path index/}"><img src="images/nav/nav_01.jpg" name="Image1" height="30" border="0" id="Image1" onmouseover="MM_swapImage('Image1','','images/nav/nav_01ov.jpg',1)" onmouseout="MM_swapImgRestore()" /></a></li>
+                             <li class=""><a href="" ><img src="images/nav/nav_02.jpg" name="Image2" height="30" border="0" id="Image2" onmouseover="MM_swapImage('Image2','','images/nav/nav_02ov.jpg',1)" onmouseout="MM_swapImgRestore()" /></a></li>
+                             <li class=""><a href="" ><img src="images/nav/nav_03.jpg" name="Image3" height="30" border="0" id="Image3" onmouseover="MM_swapImage('Image3','','images/nav/nav_03ov.jpg',1)" onmouseout="MM_swapImgRestore()" /></a></li>
+                             <li class=""><a href="" ><img src="images/nav/nav_04.jpg" name="Image4" height="30" border="0" id="Image4" onmouseover="MM_swapImage('Image4','','images/nav/nav_04ov.jpg',1)" onmouseout="MM_swapImgRestore()"  /></a></li>
+                             <li class=""><a href="" ><img src="images/nav/nav_05.jpg" height="30" border="0" id="Image5"  /></a></li>
+                             <li class=""><a href="" ><img src="images/nav/nav_06.jpg" name="Image6" height="30" border="0" id="Image6" onmouseover="MM_swapImage('Image6','','images/nav/nav_06ov.jpg',1)" onmouseout="MM_swapImgRestore()"  /></a></li>
+                             <li class=""><a href="" ><img src="images/nav/nav_07.jpg"  height="30" border="0"  /></a></li>
+                     </ul>-->
+
+
+
+
+            </div>
+        </div>
+    </div>
+    <div id="mainContent">
+<div id="sidebar" >
+                    <div id="sidebar"> <img src="images/ProductTitle.jpg" />
+                        <script type="text/javascript">
+                            $(document).ready(function()
+                            {
+                                //slides the element with class "menu_body" when paragraph with class "menu_head" is mouseover
+                                $(".menu_body a").hover(function()
+                                {
+                                    $(".navintro").css({display:"none"});
+                                    $(this).siblings(".navintro").css({display:"block"}).fadeIn("slow");
+       
+                                });
+	
+                                $(".filetree .greybg").hover(function()
+                                {
+                                    $(this).addClass('greenbg'); 
+                                },function(){
+                                    //鼠标离开时移除file_on样式
+                                    $(this).removeClass('greenbg'); 
+	
+                                });
+	
+                            });
+
+                        </script>
+                        <div  id="firstpane" class="menu_list">
+                            <ul id="browser" class="filetree treeview-famfamfam ">
+<li id="predictor1"><span class="folder" style="color: #FFFFFF;font-weight: bold">PTMs Predictor</span>
+	<ul>
+		<li class="greybg"><span class="file"><a href="http://gps.biocuckoo.cn"  class="greenlink"  onmouseover="wsug(event, 'Kinase-specific Phosphorylation Site Prediction ')" onmouseout="wsug(event, 0)" target="_blank"><strong>GPS</strong> ( <span class="STYLE4 STYLE2">Phosphorylation </span>)</a></span></li>
+		<li class="greybg"><span class="file"><a href="http://igps.biocuckoo.org"  class="greenlink"  onmouseover="wsug(event, 'GPS algorithm with PPI filter ')" onmouseout="wsug(event, 0)" target="_blank"><strong>iGPS</strong> ( <span class="STYLE4 STYLE2">Phosphorylation</span> )</a></span></li>
+		<li class="greybg"><span class="file"><a href="http://gpsd.biocuckoo.cn/" class="greenlink"  onmouseover="wsug(event, 'Phosphatase-specific Dephosphorylation Site Prediction ')" onmouseout="wsug(event, 0)" target="_blank"><strong>GPSD </strong>(<span class="STYLE4 STYLE2"> Dephosphorylation </span>)</a></span></li>
+		<li class="greybg"><span class="file"><a href="http://pbs.biocuckoo.cn/" class="greenlink"  onmouseover="wsug(event, 'Prediction of PPBD-specific Binding p-sites')" onmouseout="wsug(event, 0)" target="_blank"><strong>GPS-PBS </strong>(<span class="STYLE4 STYLE2"> PPBD-binding </span>)</a></span></li>
+		<li class="greybg"><span class="file"><a href="http://hybridsucc.biocuckoo.org/" class="greenlink"  onmouseover="wsug(event, 'Succinylation Site Prediction')" onmouseout="wsug(event, 0)" target="_blank"><strong>HybridSucc </strong>(<span class="STYLE4 STYLE2"> Succinylation </span>)</a></span></li>
+		
+		
+		<li class="greybg"><span class="file"><a href="http://msp.biocuckoo.org" class="greenlink"  onmouseover="wsug(event, 'Calpain Cleavage Site Prediction ')" onmouseout="wsug(event, 0)" target="_blank"><strong>GPS-MSP </strong>(<span class="STYLE4 STYLE2"> Protein Methylation </span>)</a></span></li>
+		<li class="greybg"><span class="file"><a href="http://gpspalm.biocuckoo.cn/" class="greenlink" onmouseover="wsug(event, 'Palmitoylation Site Prediction ')" onmouseout="wsug(event, 0)" target="_blank"><strong>GPS-Palm</strong> ( <span class="STYLE4 STYLE2">Palmitoylation </span>)</a></span></li>
+		<!--<li class="greybg"><span class="file"><a href="http://csspalm.biocuckoo.org" class="greenlink" onmouseover="wsug(event, 'Palmitoylation Site Prediction ')" onmouseout="wsug(event, 0)" target="_blank"><strong>CSS-Palm</strong> ( <span class="STYLE4 STYLE2">Palmitoylation </span>)</a></span></li>-->
+		<li class="greybg"><span class="file"><a href="http://sumosp.biocuckoo.org" class="greenlink"  onmouseover="wsug(event, 'Prediction of SUMO Modification')" onmouseout="wsug(event, 0)" target="_blank"><strong>GPS-SUMO</strong> ( <span class="STYLE4 STYLE2">Sumoylation </span>)</a></span></li>
+		<li class="greybg"><span class="file"><a href="http://sno.biocuckoo.org" class="greenlink" onmouseover="wsug(event, 'S-nitrosylation Site Prediction ')" onmouseout="wsug(event, 0)" target="_blank"><strong>GPS-SNO </strong>(<span class="STYLE4 STYLE2"> <em>S</em>-nitrosylation </span>)</a></span></li>
+		<li class="greybg"><span class="file"><a href="http://yno2.biocuckoo.org" class="greenlink"  onmouseover="wsug(event, 'Tyrosine Nitration Site Prediction ')" onmouseout="wsug(event, 0)" target="_blank"><strong>GPS-YNO2 </strong>(<span class="STYLE4 STYLE2"> Tyrosine Nitration</span> )</a></span></li>
+		<li class="greybg"><span class="file"><a href="http://ccd.biocuckoo.org" class="greenlink"  onmouseover="wsug(event, 'Calpain Cleavage Site Prediction ')" onmouseout="wsug(event, 0)" target="_blank"><strong>GPS-CCD </strong>(<span class="STYLE4 STYLE2"> Calpain Cleavage </span>)</a></span></li>
+		<li class="greybg"><span class="file"><a href="http://polo.biocuckoo.org" class="greenlink"  onmouseover="wsug(event, 'Prediction for Polo-like Kinases ')" onmouseout="wsug(event, 0)" target="_blank"><strong>GPS-Polo</strong> (<span class="STYLE4 STYLE2"> Polo-like Kinases </span>)</a></span></li>
+		<li class="greybg"><span class="file"><a href="http://pup.biocuckoo.org" class="greenlink"  onmouseover="wsug(event, 'Pupylation Sites Prediction ')" onmouseout="wsug(event, 0)" target="_blank"><strong>GPS-PUP</strong> (<span class="STYLE4 STYLE2"> Pupylation </span>)</a></span></li>
+		<li class="greybg"><span class="file"><a href="http://mba.biocuckoo.org" class="greenlink"  onmouseover="wsug(event, 'MHC-binding Site Prediction ')" onmouseout="wsug(event, 0)" target="_blank"><strong>GPS-MBA</strong> (<span class="STYLE4 STYLE2"> MHC-binding </span>)</a></span></li>
+		<li class="greybg"><span class="file"><a href="http://arm.biocuckoo.org/" class="greenlink"  onmouseover="wsug(event, 'APC/C Recognition Motif Prediction ')" onmouseout="wsug(event, 0)" target="_blank"><strong>GPS-ARM</strong> (<span class="STYLE4 STYLE2"> APC/C </span>)</a></span></li>
+		<li class="greybg"><span class="file"><a href="http://tsp.biocuckoo.org/" class="greenlink"  onmouseover="wsug(event, 'Prediction of Tyrosine Sulfation Sites ')" onmouseout="wsug(event, 0)" target="_blank"><strong>GPS-TSP</strong> (<span class="STYLE4 STYLE2"> Tyrosine sulfation </span>)</a></span></li>
+		<li class="greybg"><span class="file"><a href="http://pail.biocuckoo.org" class="greenlink"  onmouseover="wsug(event, 'Calpain Cleavage Site Prediction ')" onmouseout="wsug(event, 0)" target="_blank"><strong>GPS-PAIL </strong>(<span class="STYLE4 STYLE2"> Lysine acetylation </span>)</a></span></li>
+		<li class="greybg"><span class="file"><a href="http://gpsuber.biocuckoo.cn" class="greenlink"  onmouseover="wsug(event, 'E3-specific lysine ubiquitination sites prediction ')" onmouseout="wsug(event, 0)" target="_blank"><strong>GPS-Uber </strong>(<span class="STYLE4 STYLE2"> Ubiquitination </span>)</a></span></li>
+		<li class="greybg"><span class="file"><a href="http://kprfunc.biocuckoo.cn/" class="greenlink"  onmouseover="wsug(event, 'Functional propionylation sites prediction')" onmouseout="wsug(event, 0)" target="_blank"><strong>KprFunc </strong>(<span class="STYLE4 STYLE2"> Propionylation </span>)</a></span></li>
+		<!--   <li class="greybg"><span class="file"><a href="http://pps.biocuckoo.org" class="greenlink"  onmouseover="wsug(event, 'PTMs Peptide Scanner ')" onmouseout="wsug(event, 0)" target="_blank"><strong>DeepNitro</strong> (<span class="STYLE4 STYLE2"> PTMs Peptide Scanner</span> )</a></span></li> -->
+                                        <!--<li class="closed"><span class="file"><a href="solution.asp?pg_id=120">典型案例</a></span></li>
+                                        -->
+                                    </ul>
+                                </li>
+
+                                <li id="tools1"><span class="folder"  style="color: #FFFFFF;font-weight: bold">Tools</span>
+                                    <ul>
+									<li class="greybg" ><span class="file"><a href="http://ibs.biocuckoo.org/" class="greenlink"  onmouseover="wsug(event, 'Illustrator for Biological Sequences ')" onmouseout="wsug(event, 0)" target="_blank"><strong>IBS</strong> (<span class="STYLE4 STYLE2"> Illustrator for BioSequence</span> )</a></span></li>
+                                        <li class="greybg" ><span class="file"><a href="http://dog.biocuckoo.org/" class="greenlink"  onmouseover="wsug(event, 'Protein Domain Structure Visualization ')" onmouseout="wsug(event, 0)" target="_blank"><strong>DOG</strong> (<span class="STYLE4 STYLE2"> Domain Illustrator</span> )</a></span></li>
+										<li class="greybg" ><span class="file"><a href="http://hemi.biocuckoo.org/" class="greenlink"  onmouseover="wsug(event, 'Heatmap Illustrator ')" onmouseout="wsug(event, 0)" target="_blank"><strong>HemI</strong> (<span class="STYLE4 STYLE2"> Heatmap Illustrator</span> )</a></span></li>
+                                        <li class="greybg" ><span class="file"><a href="http://wocea.biocuckoo.org/" class="greenlink"  onmouseover="wsug(event, 'Enrichment Analysis ')" onmouseout="wsug(event, 0)" target="_blank"><strong>WocEA</strong> (<span class="STYLE4 STYLE2"> Enrichment Analysis</span> )</a></span></li>
+										<li class="greybg" ><span class="file"><a href="http://deepphagy.biocuckoo.org/" class="greenlink"  onmouseover="wsug(event, 'Deeplearning for autophagy')" onmouseout="wsug(event, 0)" target="_blank"><strong>DeepPhagy</strong> (<span class="STYLE4 STYLE2"> Autophagy images</span> )</a></span></li>
+                                    
+                                    </ul>
+                                </li>
+
+
+<li id="databases1"><span class="folder"  style="color: #FFFFFF;font-weight: bold">Databases</span>
+	<ul>        
+		<!-- <li class="greybg"><span class="file"><a href="http://thanatos.biocuckoo.org/"  class="greenlink"  onmouseover="wsug(event, 'Database of Autophagy and Cell Death Related Protein')" onmouseout="wsug(event, 0)" target="_blank"><strong>THANATOS </strong>( <span class="STYLE4 STYLE2">Autophagy</span> )</a></span></li>-->
+		<li class="greybg"><span class="file"><a href="http://microkit.biocuckoo.org/"  class="greenlink"  onmouseover="wsug(event, 'An Integrated Database of Midbody, Centrosome, Kinetochore, Telomere and Spindle')" onmouseout="wsug(event, 0)" target="_blank"><strong>MiCroKiTS </strong>(<span class="STYLE4 STYLE2"> Cell Cycle </span> )</a></span></li>
+		<li class="greybg"><span class="file"><a href="http://cgdb.biocuckoo.org/"  class="greenlink"  onmouseover="wsug(event, 'An Integrated Database of Midbody, Centrosome, Kinetochore, Telomere and Spindle')" onmouseout="wsug(event, 0)" target="_blank"><strong>CGDB </strong>(<span class="STYLE4 STYLE2"> Circadian </span> )</a></span></li>
+		<li class="greybg"><span class="file"><a href="http://llps.biocuckoo.cn/"  class="greenlink"  onmouseover="wsug(event, 'Data resource of liquid-liquid phase separation')" onmouseout="wsug(event, 0)" target="_blank"><strong>DrLLPS </strong>(<span class="STYLE4 STYLE2"> Phase Separation </span> )</a></span></li>
+		
+		<li class="greybg"><span class="file"><a href="http://iekpd.biocuckoo.org/"  class="greenlink"  onmouseover="wsug(event, 'Eukaryotic Kinase, Phosphatase and PPBD Containing Protein Database')" onmouseout="wsug(event, 0)" target="_blank"><strong>iEKPD </strong>(<span class="STYLE4 STYLE2"> PK, PP &amp; PPBD</span> )</a></span></li>
+		<li class="greybg"><span class="file"><a href="http://iuucd.biocuckoo.org/"  class="greenlink"  onmouseover="wsug(event, 'Compendium of Enzymes for Ubiquitin and Ubiquitin-like Conjugation')" onmouseout="wsug(event, 0)" target="_blank"><strong>iUUCD </strong>(<span class="STYLE4 STYLE2"> Ubiquitin Regulators </span> )</a></span></li>
+		<li class="greybg"><span class="file"><a href="http://weram.biocuckoo.org/"  class="greenlink"  onmouseover="wsug(event, 'Met.&amp;Ace. Regulators')" onmouseout="wsug(event, 0)" target="_blank"><strong>WERAM </strong>(<span class="STYLE4 STYLE2"> Me. & Ace. Regulator</span> )</a></span></li>
+		
+		
+		<li class="greybg"><span class="file"><a href="http://epsd.biocuckoo.cn/"  class="greenlink"  onmouseover="wsug(event, 'Eukaryotic Phosphorylation Site Database')" onmouseout="wsug(event, 0)" target="_blank"><strong>EPSD </strong>(<span class="STYLE4 STYLE2"> Eukaryotic Phospho </span> )</a></span></li>
+		<li class="greybg"><span class="file"><a href="http://dbpsp.biocuckoo.cn/"  class="greenlink"  onmouseover="wsug(event, 'Prokaryotic Phosphorylation Sites Database')" onmouseout="wsug(event, 0)" target="_blank"><strong>dbPSP </strong>(<span class="STYLE4 STYLE2"> Prokaryotic Phospho </span> )</a></span></li>
+		<li class="greybg"><span class="file"><a href="http://cplm.biocuckoo.cn"  class="greenlink"  onmouseover="wsug(event, 'Compendium of Protein Lysine Modification ')" onmouseout="wsug(event, 0)" target="_blank"><strong>CPLM </strong>(<span class="STYLE4 STYLE2"> Lysine Modification </span> )</a></span></li>
+		<li class="greybg"><span class="file"><a href="http://ptmd.biocuckoo.cn/"  class="greenlink"  onmouseover="wsug(event, 'PTM &amp; Disease')" onmouseout="wsug(event, 0)" target="_blank"><strong>PTMD </strong>(<span class="STYLE4 STYLE2"> PTM & Disease</span> )</a></span></li>
+		<li class="greybg"><span class="file"><a href="http://phossnp.biocuckoo.org/"  class="greenlink"  onmouseover="wsug(event, 'Influence of protein phosphorylation by nsSNP ')" onmouseout="wsug(event, 0)" target="_blank"><strong>PhosSNP </strong>(<span class="STYLE4 STYLE2"> PTM &amp; Variation </span> )</a></span></li>
+		
+		
+		<li class="greybg"><span class="file"><a href="http://dbpaf.biocuckoo.org/"  class="greenlink"  onmouseover="wsug(event, 'Animal Phosphorylation Sites Database')" onmouseout="wsug(event, 0)" target="_blank"><strong>dbPAF </strong>(<span class="STYLE4 STYLE2"> Animal Phospho </span> )</a></span></li>
+		<li class="greybg"><span class="file"><a href="http://dbppt.biocuckoo.org/"  class="greenlink"  onmouseover="wsug(event, 'Plant Phosphorylation Sites Database')" onmouseout="wsug(event, 0)" target="_blank"><strong>dbPPT </strong>(<span class="STYLE4 STYLE2"> Plant Phospho </span> )</a></span></li>
+		<li class="greybg"><span class="file"><a href="http://ipcd.biocuckoo.cn/"  class="greenlink"  onmouseover="wsug(event, 'Eukaryotic PCD regulators Database')" onmouseout="wsug(event, 0)" target="_blank"><strong>iPCD </strong>(<span class="STYLE4 STYLE2"> PCD regulators </span> )</a></span></li>		
+
+										<!-- li class="greybg"><span class="file"><a href="http://ptestis.biocuckoo.org/"  class="greenlink"  onmouseover="wsug(event, 'Database of phosphorylation sites in testis')" onmouseout="wsug(event, 0)" target="_blank"><strong>pTestis </strong>(<span class="STYLE4 STYLE2"> Testis Phospho </span> )</a></span></li-->
+										<!--<li class="greybg"><span class="file"><a href="http://lipid.biocuckoo.org/"  class="greenlink"  onmouseover="wsug(event, 'Database of Protein Lipid Modifications')" onmouseout="wsug(event, 0)" target="_blank"><strong>GPS-LipidDB </strong>(<span class="STYLE4 STYLE2"> Lipid Modification</span> )</a></span></li>-->
+	</ul>
+</li>
+
+                            </ul>
+                        </div>
+                        <script>
+//$("#browser").children().addClass("closed");
+$("#databases1").addClass("closed");
+$("#predictor1").addClass("closed");
+$("#tools1").addClass("closed");
+</script> <div id="ipcount"> 
+                            <div align="center">                            <div align="center" style="margin-left:-120px">
+<!--<script id="_waumnv">var _wau = _wau || []; _wau.push(["map", "gl109eixk3", "mnv", "250", "125", "neosat", "default-orange"]);</script><script async src="//waust.at/m.js"></script>-->
+<script id="_wau8y0">var _wau = _wau || []; _wau.push(["map", "fjerenzmg2", "8y0", "250", "125", "neosat", "default-orange"]);</script><script async src="//waust.at/m.js"></script>
+                                <!--<br /><script id="_waunhl">var _wau = _wau || []; _wau.push(["map", "nu3jm01ugg", "nhl", "250", "125", "neosat", "default-orange"]);</script><script async src="//waust.at/m.js"></script>-->
+<!--  <script type="text/javascript" src="http://js.tongji.linezing.com/685763/tongjimagmag.js"></script><noscript><a href="http://www.linezing.com"><img src="http://img.tongji.linezing.com/685763/tongji.gif"/></a></noscript> -->
+<br /><br /></div>
+                                <img src='images/0.gif' width='15' height='20' /><img src='images/0.gif' width='15' height='20' /><img src='images/0.gif' width='15' height='20' /><img src='images/1.gif' width='15' height='20' /><img src='images/3.gif' width='15' height='20' /><img src='images/3.gif' width='15' height='20' /><img src='images/6.gif' width='15' height='20' /></div>
+
+
+
+                            <span>Last update: Jun. 10th, 2019</span></div>
+							
+                    </div>
+	<!--				
+                    <script type="text/javascript">
+                        $(document).ready(function()
+                        {
+                            //slides the element with class "menu_body" when paragraph with class "menu_head" is mouseover
+                            $(".menu_body a").hover(function()
+                            {
+                                $(".navintro").css({display:"none"});
+                                $(this).siblings(".navintro").css({display:"block"}).fadeIn("slow");
+       
+                            });	
+                        });
+
+                    </script>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-4888242-8");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+-->
+                </div>    <div id="content">
+        <div id="contentkk" class="story"><br />
+            <!--<div id="breadCrumb"> <a href="#">Home</a> / <a href="#">GPS</a> / <a href="#">GPS-SNO 1.0　INTRODUCTION</a> / </div>-->
+            <br/><font face="Arial, Helvetica, sans-serif" size="4" color="#209bb7"><strong>&#8251; DOWNLOAD</strong></font>  <br/>
+            <br/>
+			<font face="Arial, Helvetica, sans-serif">The data of known 9,285 LLPS-associated proteins, including 150 scaffolds, 987 regulators and 8,148 potential clients.</font>
+			<div class="dTreeNode"><img id="idreeall0" src="images/base.png" alt=""><a id="sdreeall0" class="node" href="./download/LLPS.txt" onclick="javascript: dreeall.s(0);">Click here to download</a></div>
+            <br/><hr align="left" width="99%" size="1" color="#209bb7">
+           
+            <script type="text/javascript" src="dtree.js"></script>
+<a href="#sequences" target="_self"><font face="Arial, Helvetica, sans-serif" size="4" color="#3a8dbf"><strong>&lt;1&gt; Download Sequences</strong></font></a> <br>
+            
+
+
+            <br/>
+<a href="#annotations" target="_self"><font face="Arial, Helvetica, sans-serif" size="4" color="#3a8dbf"><strong>&lt;2&gt; Download Annotations</strong></font></a><br/><br/><br/><br/>
+            <div align="justify"><font face="Arial, Helvetica, sans-serif"><strong><a name="sequences"></a><font color="#333333" size="4">&nbsp;&lt;1&gt; Download sequences</font></strong>:</font></div>
+            <table  width="85%" border="0" align="center" cellpadding="3" cellspacing="1" style="border-collapse:collapse;table-layout:fixed;">
+                <tr>
+                    <br/>
+                    <hr align="left" width="99%" size="1" color="#209bb7">
+                </tr>
+                <tr>
+                    <td valign="top" width='50%' align="left" >
+                        <div class="dtree" style="border:hidden">
+                            <p><a href="javascript: d.openAll();">Open all</a> | <a href="javascript: d.closeAll();">Close all</a></p>
+                            <script type="text/javascript" >
+
+                                d = new dTree('d');
+
+                                d.add(0,-1,'Animals tree');
+
+                                d.add(111,0,'Total');
+                                d.add(100,0,'Primates');
+                                d.add(101,0,'Rodents');
+                                d.add(102,0,'Laurasiatheria');
+                                d.add(103,0,'Afrotheria');
+                                d.add(104,0,'Xenarthra');
+                                d.add(105,0,'Metatheria');
+
+                                d.add(107,0,'Birds & Reptiles');
+                                d.add(106,0,'Amphibians');
+                                d.add(108,0,'Fishes');
+                                d.add(109,0,'Other Chordates ');
+                                d.add(110,0,'Other Animals');
+
+
+
+                                d.add(300001,111,"<a href='./download/protein/Animals.zip' download='Animals.zip'>Download protein sequences</a>");
+                                d.add(300002,111,"<a href='./download/dna/Animals.zip' download='Animals.zip'>Download dna sequences</a>");
+                                //d.add(300003,111,"<a href='./download/domain/Animals_domain.zip' download='Animals_domain.zip'>Download domain sequences</a>");
+
+                                d.add(26,100,'Homo sapiens');
+                                d.add(300003,26,"<a href='./download/protein/Homo_sapiens.zip' download='Homo_sapiens.zip'>Download protein sequences</a>");
+                                d.add(300004,26,"<a href='./download/dna/Homo_sapiens.zip' download='Homo_sapiens.zip'>Download dna sequences</a>");
+                                //d.add(300005,26,"<a href='./download/domain/Homo_sapiens_domain.zip' download='Homo_sapiens_domain.zip'>Download domain sequences</a>");
+
+                                d.add(28,100,'Pan troglodytes');
+                                d.add(300003,28,"<a href='./download/protein/Pan_troglodytes.zip' download='Pan_troglodytes.zip'>Download protein sequences</a>");
+                                d.add(300004,28,"<a href='./download/dna/Pan_troglodytes.zip' download='Pan_troglodytes.zip'>Download dna sequences</a>");
+                                //d.add(300005,28,"<a href='./download/domain/Pan_troglodytes_domain.zip' download='Pan_troglodytes_domain.zip'>Download domain sequences</a>");
+
+
+                                d.add(33,100,'Gorilla gorilla');
+                                d.add(300005,33,"<a href='./download/protein/Gorilla_gorilla.zip' download='Gorilla_gorilla.zip'>Download protein sequences</a>");
+                                d.add(300006,33,"<a href='./download/dna/Gorilla_gorilla.zip' download='Gorilla_gorilla.zip'>Download dna sequences</a>");
+                                //d.add(300007,33,"<a href='./download/domain/Gorilla_gorilla_domain.zip' download='Gorilla_gorilla_domain.zip'>Download domain sequences</a>");
+
+
+                                d.add(70,100,'Chlorocebus sabaeus');
+                                d.add(300007,70,"<a href='./download/protein/Chlorocebus_sabaeus.zip' download='Chlorocebus_sabaeus.zip'>Download protein sequences</a>");
+                                d.add(300008,70,"<a href='./download/protein/Chlorocebus_sabaeus.zip' download='Chlorocebus_sabaeus.zip'>Download dna sequences</a>");
+                                //d.add(300009,70,"<a href='./download/domain/Chlorocebus_sabaeus_domain.zip' download='Chlorocebus_sabaeus_domain.zip'>Download domain sequences</a>");
+
+
+                                d.add(32,100,'Pongo abelii');
+                                d.add(300009,32,"<a href='./download/protein/Pongo_abelii.zip' download='Pongo_abelii.zip'>Download protein sequences</a>");
+                                d.add(300010,32,"<a href='./download/dna/Pongo_abelii.zip' download='Pongo_abelii.zip'>Download dna sequences</a>");
+                                //d.add(300011,32,"<a href='./download/domain/Pongo_abelii_domain.zip' download='Pongo_abelii_domain.zip'>Download domain sequences</a>");
+
+
+                                d.add(30,100,'Nomascus leucogenys');
+                                d.add(300011,30,"<a href='./download/protein/Nomascus_leucogenys.zip' download='Nomascus_leucogenys.zip'>Download protein sequences</a>");
+                                d.add(300012,30,"<a href='./download/dna/Pongo_abelii.zip' download='Pongo_abelii.zip'>Download dna sequences</a>");
+                                //d.add(300013,30,"<a href='./download/domain/Pongo_abelii_domain.zip' download='Pongo_abelii_domain.zip'>Download domain sequences</a>");
+
+
+                                d.add(27,100,'Macaca mulatta','species_family.php?spe=Macaca_mulatta');
+                                d.add(300013,27,"<a href='./download/protein/Macaca_mulatta.zip' download='Macaca_mulatta.zip'>Download protein sequences</a>");
+                                d.add(300014,27,"<a href='./download/dna/Macaca_mulatta.zip' download='Macaca_mulatta.zip'>Download dna sequences</a>");
+                                //d.add(300015,27,"<a href='./download/domain/Macaca_mulatta_domain.zip' download='Macaca_mulatta_domain.zip'>Download domain sequences</a>");
+
+
+                                d.add(71,100,'Papio anubis');
+                                d.add(300015,71,"<a href='./download/protein/Papio_anubis.zip' download='Papio_anubis.zip'>Download protein sequences</a>");
+                                d.add(300016,71,"<a href='./download/dna/Papio_anubis.zip' download='Papio_anubis.zip'>Download dna sequences</a>");
+                                //d.add(300017,71,"<a href='./download/domain/Papio_anubis_domain.zip' download='Papio_anubis_domain.zip'>Download domain sequences</a>");
+
+
+                                d.add(29,100,'Callithrix jacchus');
+                                d.add(300017,29,"<a href='./download/protein/Callithrix_jacchus.zip' download='Callithrix_jacchus.zip'>Download protein sequences</a>");
+                                d.add(300018,29,"<a href='./download/dna/Callithrix_jacchus.zip' download='Callithrix_jacchus.zip'>Download dna sequences</a>");
+                                //d.add(300019,29,"<a href='./download/domain/Callithrix_jacchus_domain.zip' download='Callithrix_jacchus_domain.zip'>Download domain sequences</a>");
+
+                                d.add(80,100,'Carlito syrichta');
+                                d.add(300019,80,"<a href='./download/protein/Carlito_syrichta.zip' download='Carlito_syrichta.zip'>Download protein sequences</a>");
+                                d.add(300020,80,"<a href='./download/dna/Carlito_syrichta.zip' download='Carlito_syrichta.zip'>Download dna sequences</a>");
+                                //d.add(300021,80,"<a href='./download/domain/Carlito_syrichta_domain.zip' download='Carlito_syrichta_domain.zip'>Download domain sequences</a>");
+
+
+                                d.add(31,100,'Microcebus murinus');
+                                d.add(300021,31,"<a href='./download/protein/Microcebus_murinus.zip' download='Microcebus_murinus.zip'>Download protein sequences</a>");
+                                d.add(300022,31,"<a href='./download/dna/Microcebus_murinus.zip' download='Microcebus_murinus.zip'>Download dna sequences</a>");
+                                //d.add(300023,31,"<a href='./download/domain/Microcebus_murinus_domain.zip' download='Microcebus_murinus_domain.zip'>Download domain sequences</a>");
+
+
+                                d.add(25,100,'Otolemur garnettii');
+                                d.add(300023,25,"<a href='./download/protein/Otolemur_garnettii.zip' download='Otolemur_garnettii.zip'>Download protein sequences</a>");
+                                d.add(300024,25,"<a href='./download/dna/Otolemur_garnettii.zip' download='Otolemur_garnettii.zip'>Download dna sequences</a>");
+                                //d.add(300025,25,"<a href='./download/domain/Otolemur_garnettii_domain.zip' download='Otolemur_garnettii_domain.zip'>Download domain sequences</a>");
+
+                                //XINJIA
+                                d.add(25501,100,'Macaca fascicularis');
+                                d.add(3000235,25501,"<a href='./download/protein/Macaca_fascicularis.zip' download='Macaca_fascicularis.zip'>Download protein sequences</a>");
+                                d.add(3000245,25501,"<a href='./download/dna/Macaca_fascicularis.zip' download='Macaca_fascicularis.zip'>Download dna sequences</a>");
+                                //d.add(3000255,25501,"<a href='./download/domain/Macaca_fascicularis_domain.zip' download='Macaca_fascicularis_domain.zip'>Download domain sequences</a>");
+
+                                d.add(25601,100,'Cercocebus atys');
+                                d.add(30002355,25601,"<a href='./download/protein/Cercocebus_atys.zip' download='Cercocebus_atys.zip'>Download protein sequences</a>");
+                                d.add(30002455,25601,"<a href='./download/dna/Cercocebus_atys.zip' download='Cercocebus_atys.zip'>Download dna sequences</a>");
+                                //d.add(30002555,25601,"<a href='./download/domain/Cercocebus_atys_domain.zip' download='Cercocebus_atys_domain.zip'>Download domain sequences</a>");
+
+                                d.add(257,100,'Pan paniscus');
+                                d.add(300023,257,"<a href='./download/protein/Pan_paniscus.zip' download='Pan_paniscus.zip'>Download protein sequences</a>");
+                                d.add(300024,257,"<a href='./download/dna/Pan_paniscus.zip' download='Pan_paniscus.zip'>Download dna sequences</a>");
+                                //d.add(300025,257,"<a href='./download/domain/Pan_paniscus_domain.zip' download='Pan_paniscus_domain.zip'>Download domain sequences</a>");
+
+
+
+                                d.add(67,101,'Tupaia belangeri');
+                                d.add(300025,67,"<a href='./download/protein/Tupaia_belangeri.zip' download='Tupaia_belangeri.zip'>Download protein sequences</a>");
+                                d.add(300026,67,"<a href='./download/dna/Tupaia_belangeri.zip' download='Tupaia_belangeri.zip'>Download dna sequences</a>");
+                                //d.add(300027,67,"<a href='./download/domain/Tupaia_belangeri_domain.zip' download='Tupaia_belangeri_domain.zip'>Download domain sequences</a>");
+
+                                d.add(53,101,'Mus musculus');
+                                d.add(300027,53,"<a href='./download/protein/Mus_musculus.zip' download='Mus_musculus.zip'>Download protein sequences</a>");
+                                d.add(300028,53,"<a href='./download/dna/Mus_musculus.zip' download='Mus_musculus.zip'>Download dna sequences</a>");
+                                //d.add(300029,53,"<a href='./download/domain/Mus_musculus_domain.zip' download='Mus_musculus_domain.zip'>Download domain sequences</a>");
+
+                                d.add(64,101,'Rattus norvegicus');
+                                d.add(300029,64,"<a href='./download/protein/Rattus_norvegicus.zip' download='Rattus_norvegicus.zip'>Download protein sequences</a>");
+                                d.add(300030,64,"<a href='./download/dna/Rattus_norvegicus.zip' download='Rattus_norvegicus.zip'>Download dna sequences</a>");
+                                //d.add(300031,64,"<a href='./download/domain/Rattus_norvegicus_domain.zip' download='Rattus_norvegicus_domain.zip'>Download domain sequences</a>");
+
+                                d.add(65,101,'Dipodomys ordii');
+                                d.add(300031,65,"<a href='./download/protein/Dipodomys_ordii.zip' download='Dipodomys_ordii.zip'>Download protein sequences</a>");
+                                d.add(300032,65,"<a href='./download/dna/Dipodomys_ordii.zip' download='Dipodomys_ordii.zip'>Download dna sequences</a>");
+                                //d.add(300033,65,"<a href='./download/domain/Dipodomys_ordii_domain.zip' download='Dipodomys_ordii_domain.zip'>Download domain sequences</a>");
+
+
+                                d.add(52,101,'Cavia porcellus');
+                                d.add(300033,52,"<a href='./download/protein/Cavia_porcellus.zip' download='Cavia_porcellus.zip'>Download protein sequences</a>");
+                                d.add(300034,52,"<a href='./download/dna/Cavia_porcellus.zip' download='Cavia_porcellus.zip'>Download dna sequences</a>");
+                                //d.add(300035,52,"<a href='./download/domain/Cavia_porcellus_domain.zip' download='Cavia_porcellus_domain.zip'>Download domain sequences</a>");
+
+
+                                d.add(62,101,'Ictidomys tridecemlineatus');
+                                d.add(300035,62,"<a href='./download/protein/Ictidomys_tridecemlineatus.zip' download='Ictidomys_tridecemlineatus.zip'>Download protein sequences</a>");
+                                d.add(300036,62,"<a href='./download/dna/Ictidomys_tridecemlineatus.zip' download='Ictidomys_tridecemlineatus.zip'>Download dna sequences</a>");
+                                //d.add(300037,62,"<a href='./download/domain/Ictidomys_tridecemlineatus_domain.zip' download='Ictidomys_tridecemlineatus_domain.zip'>Download domain sequences</a>");
+
+                                d.add(68,101,'Oryctolagus cuniculus');
+                                d.add(300037,68,"<a href='./download/protein/Oryctolagus_cuniculus.zip' download='Oryctolagus_cuniculus.zip'>Download protein sequences</a>");
+                                d.add(300038,68,"<a href='./download/dna/Oryctolagus_cuniculus.zip' download='Oryctolagus_cuniculus.zip'>Download dna sequences</a>");
+                                //d.add(300039,68,"<a href='./download/domain/Oryctolagus_cuniculus_domain.zip' download='Oryctolagus_cuniculus_domain.zip'>Download domain sequences</a>");
+
+
+                                d.add(255,101,'Fukomys damarensis');
+                                d.add(30003999,255,"<a href='./download/protein/Fukomys_damarensis.zip' download='Fukomys_damarensis.zip'>Download protein sequences</a>");
+                                d.add(30004099,255,"<a href='./download/dna/Fukomys_damarensis.zip' download='Fukomys_damarensis.zip'>Download dna sequences</a>");
+                                //d.add(30004199,255,"<a href='./download/domain/Fukomys_damarensis_domain.zip' download='Fukomys_damarensis_domain.zip'>Download domain sequences</a>");
+
+                                d.add(256,101,'Octodon degus');
+                                d.add(300039,256,"<a href='./download/protein/Octodon_degus.zip' download='Octodon_degus.zip'>Download protein sequences</a>");
+                                d.add(300040,256,"<a href='./download/dna/Octodon_degus.zip' download='Octodon_degus.zip'>Download dna sequences</a>");
+                                //d.add(300041,256,"<a href='./download/domain/Octodon_degus_domain.zip' download='Octodon_degus_domain.zip'>Download domain sequences</a>");
+
+
+                                d.add(72,102,'Ovis aries');
+                                d.add(300041,72,"<a href='./download/protein/Ovis_aries.zip' download='Ovis_aries.zip'>Download protein sequences</a>");
+                                d.add(300042,72,"<a href='./download/dna/Ovis_aries.zip' download='Ovis_aries.zip'>Download dna sequences</a>");
+                                //d.add(300043,72,"<a href='./download/domain/Ovis_aries_domain.zip' download='Ovis_aries_domain.zip'>Download domain sequences</a>");
+
+                                d.add(39,102,'Bos taurus');
+                                d.add(300043,39,"<a href='./download/protein/Bos_taurus.zip' download='Bos_taurus.zip'>Download protein sequences</a>");
+                                d.add(300044,39,"<a href='./download/dna/Bos_taurus.zip' download='Bos_taurus.zip'>Download dna sequences</a>");
+                                //d.add(300045,39,"<a href='./download/domain/Bos_taurus_domain.zip' download='Bos_taurus_domain.zip'>Download domain sequences</a>");
+
+
+                                d.add(36,102,'Vicugna pacos');
+                                d.add(300045,36,"<a href='./download/protein/Vicugna_pacos.zip' download='Vicugna_pacos.zip'>Download protein sequences</a>");
+                                d.add(300046,36,"<a href='./download/dna/Vicugna_pacos.zip' download='Vicugna_pacos.zip'>Download dna sequences</a>");
+                                //d.add(300047,36,"<a href='./download/domain/Vicugna_pacos_domain.zip' download='Vicugna_pacos_domain.zip'>Download domain sequences</a>");
+
+                                d.add(41,102,'Tursiops truncatus');
+                                d.add(300047,41,"<a href='./download/protein/Tursiops_truncatus.zip' download='Tursiops_truncatus.zip'>Download protein sequences</a>");
+                                d.add(300048,41,"<a href='./download/dna/Tursiops_truncatus.zip' download='Tursiops_truncatus.zip'>Download dna sequences</a>");
+                                //d.add(300049,41,"<a href='./download/domain/Tursiops_truncatus_domain.zip' download='Tursiops_truncatus_domain.zip'>Download domain sequences</a>");
+
+                                d.add(48,102,'Sus scrofa');
+                                d.add(300049,48,"<a href='./download/protein/Sus_scrofa.zip' download='Sus_scrofa.zip'>Download protein sequences</a>");
+                                d.add(300050,48,"<a href='./download/dna/Sus_scrofa.zip' download='Sus_scrofa.zip'>Download dna sequences</a>");
+                                //d.add(300051,48,"<a href='./download/domain/Sus_scrofa_domain.zip' download='Sus_scrofa_domain.zip'>Download domain sequences</a>");
+
+                                d.add(146,102,'Mustela putorius furo');
+                                d.add(300051,146,"<a href='./download/protein/Mustela_putorius_furo.zip' download='Mustela_putorius_furo.zip'>Download protein sequences</a>");
+                                d.add(300052,146,"<a href='./download/dna/Mustela_putorius_furo.zip' download='Mustela_putorius_furo.zip'>Download dna sequences</a>");
+                                //d.add(300053,146,"<a href='./download/domain/Mustela_putorius_furo_domain.zip' download='Mustela_putorius_furo_domain.zip'>Download domain sequences</a>");
+
+                                d.add(47,102,'Ailuropoda melanoleuca');
+                                d.add(300053,47,"<a href='./download/protein/Ailuropoda_melanoleuca.zip' download='Ailuropoda_melanoleuca.zip'>Download protein sequences</a>");
+                                d.add(300054,47,"<a href='./download/dna/Ailuropoda_melanoleuca.zip' download='Ailuropoda_melanoleuca.zip'>Download dna sequences</a>");
+                                //d.add(300055,47,"<a href='./download/domain/Ailuropoda_melanoleuca_domain.zip' download='Ailuropoda_melanoleuca_domain.zip'>Download domain sequences</a>");
+
+                                d.add(40,102,'Canis familiaris');
+                                d.add(300055,40,"<a href='./download/protein/Canis_familiaris.zip' download='Canis_familiaris.zip'>Download protein sequences</a>");
+                                d.add(300056,40,"<a href='./download/dna/Canis_familiaris.zip' download='Canis_familiaris.zip'>Download dna sequences</a>");
+                                //d.add(300057,40,"<a href='./download/domain/Canis_familiaris_domain.zip' download='Canis_familiaris_domain.zip'>Download domain sequences</a>");
+
+                                d.add(37,102,'Felis catus');
+                                d.add(300057,37,"<a href='./download/protein/Felis_catus.zip' download='Felis_catus.zip'>Download protein sequences</a>");
+                                d.add(300058,37,"<a href='./download/dna/Felis_catus.zip' download='Felis_catus.zip'>Download dna sequences</a>");
+                                //d.add(300059,37,"<a href='./download/domain/Felis_catus_domain.zip' download='Felis_catus_domain.zip'>Download domain sequences</a>");
+
+                                d.add(42,102,'Equus caballus');
+                                d.add(300059,42,"<a href='./download/protein/Equus_caballus.zip' download='Equus_caballus.zip'>Download protein sequences</a>");
+                                d.add(300060,42,"<a href='./download/dna/Equus_caballus.zip' download='Equus_caballus.zip'>Download dna sequences</a>");
+                                //d.add(300061,42,"<a href='./download/domain/Equus_caballus_domain.zip' download='Equus_caballus_domain.zip'>Download domain sequences</a>");
+
+                                d.add(44,102,'Myotis lucifugus','species_family.php?spe=Myotis_lucifugus');
+                                d.add(300061,44,"<a href='./download/protein/Myotis_lucifugus.zip' download='Myotis_lucifugus.zip'>Download protein sequences</a>");
+                                d.add(300062,44,"<a href='./download/dna/Myotis_lucifugus.zip' download='Myotis_lucifugus.zip'>Download dna sequences</a>");
+                                //d.add(300063,44,"<a href='./download/domain/Myotis_lucifugus_domain.zip' download='Myotis_lucifugus_domain.zip'>Download domain sequences</a>");
+
+                                d.add(43,102,'Pteropus vampyrus');
+                                d.add(300063,43,"<a href='./download/protein/Pteropus_vampyrus.zip' download='Pteropus_vampyrus.zip'>Download protein sequences</a>");
+                                d.add(300064,43,"<a href='./download/dna/Pteropus_vampyrus.zip' download='Pteropus_vampyrus.zip'>Download dna sequences</a>");
+                                //d.add(300065,43,"<a href='./download/domain/Pteropus_vampyrus_domain.zip' download='Pteropus_vampyrus_domain.zip'>Download domain sequences</a>");
+
+                                d.add(45,102,'Erinaceus europaeus');
+                                d.add(300065,45,"<a href='./download/protein/Erinaceus_europaeus.zip' download='Erinaceus_europaeus.zip'>Download protein sequences</a>");
+                                d.add(300067,45,"<a href='./download/dna/Erinaceus_europaeus.zip' download='Erinaceus_europaeus.zip'>Download dna sequences</a>");
+                                //d.add(300068,45,"<a href='./download/domain/Erinaceus_europaeus_domain.zip' download='Erinaceus_europaeus_domain.zip'>Download domain sequences</a>");
+
+                                d.add(46,102,'Sorex araneus');
+                                d.add(300067,46,"<a href='./download/protein/Sorex_araneus.zip' download='Sorex_araneus.zip'>Download protein sequences</a>");
+                                d.add(300068,46,"<a href='./download/dna/Sorex_araneus.zip' download='Sorex_araneus.zip'>Download dna sequences</a>");
+                                //d.add(300069,46,"<a href='./download/domain/Sorex_araneus_domain.zip' download='Sorex_araneus_domain.zip'>Download domain sequences</a>");
+
+
+                                d.add(49,103,'Loxodonta africana');
+                                d.add(300069,49,"<a href='./download/protein/Loxodonta_africana.zip' download='Loxodonta_africana.zip'>Download protein sequences</a>");
+                                d.add(300070,49,"<a href='./download/dna/Loxodonta_africana.zip' download='Loxodonta_africana.zip'>Download dna sequences</a>");
+                                //d.add(300071,49,"<a href='./download/domain/Loxodonta_africana_domain.zip' download='Loxodonta_africana_domain.zip'>Download domain sequences</a>");
+
+                                d.add(50,103,'Procavia capensis');
+                                d.add(300071,50,"<a href='./download/protein/Procavia_capensis.zip' download='Procavia_capensis.zip'>Download protein sequences</a>");
+                                d.add(300072,50,"<a href='./download/dna/Procavia_capensis.zip' download='Procavia_capensis.zip'>Download dna sequences</a>");
+                                //d.add(300073,50,"<a href='./download/domain/Procavia_capensis_domain.zip' download='Procavia_capensis_domain.zip'>Download domain sequences</a>");
+
+                                d.add(51,103,'Echinops telfairi');
+                                d.add(300073,51,"<a href='./download/protein/Echinops_telfairi.zip' download='Echinops_telfairi.zip'>Download protein sequences</a>");
+                                d.add(300074,51,"<a href='./download/dna/Echinops_telfairi.zip' download='Echinops_telfairi.zip'>Download dna sequences</a>");
+                                //d.add(300075,51,"<a href='./download/domain/Echinops_telfairi_domain.zip' download='Echinops_telfairi_domain.zip'>Download domain sequences</a>");
+
+                                d.add(34,104,'Dasypus novemcinctus');
+                                d.add(300075,34,"<a href='./download/protein/Dasypus_novemcinctus.zip' download='Dasypus_novemcinctus.zip'>Download protein sequences</a>");
+                                d.add(300076,34,"<a href='./download/dna/Dasypus_novemcinctus.zip' download='Dasypus_novemcinctus.zip'>Download dna sequences</a>");
+                                //d.add(300077,34,"<a href='./download/domain/Dasypus_novemcinctus_domain.zip' download='Dasypus_novemcinctus_domain.zip'>Download domain sequences</a>");
+
+                                d.add(35,104,'Choloepus hoffmanni');
+                                d.add(300077,35,"<a href='./download/protein/Choloepus_hoffmanni.zip' download='Choloepus_hoffmanni.zip'>Download protein sequences</a>");
+                                d.add(300078,35,"<a href='./download/dna/Choloepus_hoffmanni.zip' download='Choloepus_hoffmanni.zip'>Download dna sequences</a>");
+                                //d.add(300079,35,"<a href='./download/domain/Choloepus_hoffmanni_domain.zip' download='Choloepus_hoffmanni_domain.zip'>Download domain sequences</a>");
+
+
+                                d.add(55,105,'Monodelphis domestica');
+                                d.add(300079,55,"<a href='./download/protein/Monodelphis_domestica.zip' download='Monodelphis_domestica.zip'>Download protein sequences</a>");
+                                d.add(300080,55,"<a href='./download/dna/Monodelphis_domestica.zip' download='Monodelphis_domestica.zip'>Download dna sequences</a>");
+                                //d.add(300081,55,"<a href='./download/domain/Monodelphis_domestica_domain.zip' download='Monodelphis_domestica_domain.zip'>Download domain sequences</a>");
+
+                                d.add(57,105,'Mesocricetus auratus');
+                                d.add(300081,57,"<a href='./download/protein/Mesocricetus_auratus.zip' download='Mesocricetus_auratus.zip'>Download protein sequences</a>");
+                                d.add(300082,57,"<a href='./download/dna/Mesocricetus_auratus.zip' download='Mesocricetus_auratus.zip'>Download dna sequences</a>");
+                                //d.add(300083,57,"<a href='./download/domain/Mesocricetus_auratus_domain.zip' download='Mesocricetus_auratus_domain.zip'>Download domain sequences</a>");
+
+                                d.add(91,105,'Sarcophilus harrisii');
+                                d.add(300083,91,"<a href='./download/protein/Sarcophilus_harrisii.zip' download='Sarcophilus_harrisii.zip'>Download protein sequences</a>");
+                                d.add(300084,91,"<a href='./download/dna/Sarcophilus_harrisii.zip' download='Sarcophilus_harrisii.zip'>Download dna sequences</a>");
+                                //d.add(300085,91,"<a href='./download/domain/Sarcophilus_harrisii_domain.zip' download='Sarcophilus_harrisii_domain.zip'>Download domain sequences</a>");
+
+                                d.add(56,105,'Ornithorhynchus anatinus');
+                                d.add(300085,56,"<a href='./download/protein/Ornithorhynchus_anatinus.zip' download='Ornithorhynchus_anatinus.zip'>Download protein sequences</a>");
+                                d.add(300086,56,"<a href='./download/dna/Ornithorhynchus_anatinus.zip' download='Ornithorhynchus_anatinus.zip'>Download dna sequences</a>");
+                                //d.add(300087,56,"<a href='./download/domain/Ornithorhynchus_anatinus_domain.zip' download='Ornithorhynchus_anatinus_domain.zip'>Download domain sequences</a>");
+
+                                d.add(24,106,'Xenopus tropicalis');
+                                d.add(300087,24,"<a href='./download/protein/Xenopus_tropicalis.zip' download='Xenopus_tropicalis.zip'>Download protein sequences</a>");
+                                d.add(300088,24,"<a href='./download/dna/Xenopus_tropicalis.zip' download='Xenopus_tropicalis.zip'>Download dna sequences</a>");
+                                //d.add(300089,24,"<a href='./download/domain/Xenopus_tropicalis_domain.zip' download='Xenopus_tropicalis_domain.zip'>Download domain sequences</a>");
+
+                                d.add(73,107,'Anas platyrhynchos');
+                                d.add(300089,73,"<a href='./download/protein/Anas_platyrhynchos.zip' download='Anas_platyrhynchos.zip'>Download protein sequences</a>");
+                                d.add(300090,73,"<a href='./download/dna/Anas_platyrhynchos.zip' download='Anas_platyrhynchos.zip'>Download dna sequences</a>");
+                                //d.add(300091,73,"<a href='./download/domain/Anas_platyrhynchos_domain.zip' download='Anas_platyrhynchos_domain.zip'>Download domain sequences</a>");
+
+                                d.add(16,107,'Meleagris gallopavo');
+                                d.add(300091,16,"<a href='./download/protein/Meleagris_gallopavo.zip' download='Meleagris_gallopavo.zip'>Download protein sequences</a>");
+                                d.add(300092,16,"<a href='./download/dna/Meleagris_gallopavo.zip' download='Meleagris_gallopavo.zip'>Download dna sequences</a>");
+                                //d.add(300093,16,"<a href='./download/domain/Meleagris_gallopavo_domain.zip' download='Meleagris_gallopavo_domain.zip'>Download domain sequences</a>");
+
+                                d.add(15,107,'Gallus gallus');
+                                d.add(300093,15,"<a href='./download/protein/Gallus_gallus.zip' download='Gallus_gallus.zip'>Download protein sequences</a>");
+                                d.add(300094,15,"<a href='./download/dna/Gallus_gallus.zip' download='Gallus_gallus.zip'>Download dna sequences</a>");
+                                //d.add(300095,15,"<a href='./download/domain/Gallus_gallus_domain.zip' download='Gallus_gallus_domain.zip'>Download domain sequences</a>");
+
+                                d.add(20,107,'Taeniopygia guttata');
+                                d.add(300095,20,"<a href='./download/protein/Taeniopygia_guttata.zip' download='Taeniopygia_guttata.zip'>Download protein sequences</a>");
+                                d.add(300096,20,"<a href='./download/dna/Taeniopygia_guttata.zip' download='Taeniopygia_guttata.zip'>Download dna sequences</a>");
+                                //d.add(300097,20,"<a href='./download/domain/Taeniopygia_guttata_domain.zip' download='Taeniopygia_guttata_domain.zip'>Download domain sequences</a>");
+
+                                d.add(74,107,'Ficedula albicollis');
+                                d.add(300097,74,"<a href='./download/protein/Ficedula_albicollis.zip' download='Ficedula_albicollis.zip'>Download protein sequences</a>");
+                                d.add(300098,74,"<a href='./download/dna/Ficedula_albicollis.zip' download='Ficedula_albicollis.zip'>Download dna sequences</a>");
+                                //d.add(300099,74,"<a href='./download/domain/Ficedula_albicollis_domain.zip' download='Ficedula_albicollis_domain.zip'>Download domain sequences</a>");
+
+                                d.add(54,107,'Anolis carolinensis');
+                                d.add(300099,54,"<a href='./download/protein/Anolis_carolinensis.zip' download='Anolis_carolinensis.zip'>Download protein sequences</a>");
+                                d.add(300100,54,"<a href='./download/dna/Anolis_carolinensis.zip' download='Anolis_carolinensis.zip'>Download dna sequences</a>");
+                                //d.add(300101,54,"<a href='./download/domain/Anolis_carolinensis_domain.zip' download='Anolis_carolinensis_domain.zip'>Download domain sequences</a>");
+
+                                d.add(219,107,'Pelodiscus sinensis');
+                                d.add(300101,219,"<a href='./download/protein/Pelodiscus_sinensis.zip' download='Pelodiscus_sinensis.zip'>Download protein sequences</a>");
+                                d.add(300102,219,"<a href='./download/dna/Pelodiscus_sinensis.zip' download='Pelodiscus_sinensis.zip'>Download dna sequences</a>");
+                                //d.add(300103,219,"<a href='./download/domain/Pelodiscus_sinensis_domain.zip' download='Pelodiscus_sinensis_domain.zip'>Download domain sequences</a>");
+
+                                d.add(17,108,'Tetraodon nigroviridis');
+                                d.add(300101,17,"<a href='./download/protein/Tetraodon_nigroviridis.zip' download='Tetraodon_nigroviridis.zip'>Download protein sequences</a>");
+                                d.add(300102,17,"<a href='./download/dna/Tetraodon_nigroviridis.zip' download='Tetraodon_nigroviridis.zip'>Download dna sequences</a>");
+                                //d.add(300103,17,"<a href='./download/domain/Tetraodon_nigroviridis_domain.zip' download='Tetraodon_nigroviridis_domain.zip'>Download domain sequences</a>");
+
+                                d.add(23,108,'Takifugu rubripes');
+                                d.add(300103,23,"<a href='./download/protein/Takifugu_rubripes.zip' download='Takifugu_rubripes.zip'>Download protein sequences</a>");
+                                d.add(300104,23,"<a href='./download/dna/Takifugu_rubripes.zip' download='Takifugu_rubripes.zip'>Download dna sequences</a>");
+                                //d.add(300105,23,"<a href='./download/domain/Takifugu_rubripes_domain.zip' download='Takifugu_rubripes_domain.zip'>Download domain sequences</a>");
+
+                                d.add(21,108,'Gasterosteus aculeatus');
+                                d.add(300105,21,"<a href='./download/protein/Gasterosteus_aculeatus.zip' download='Gasterosteus_aculeatus.zip'>Download protein sequences</a>");
+                                d.add(300106,21,"<a href='./download/dna/Gasterosteus_aculeatus.zip' download='Gasterosteus_aculeatus.zip'>Download dna sequences</a>");
+                                //d.add(300107,21,"<a href='./download/domain/Gasterosteus_aculeatus_domain.zip' download='Gasterosteus_aculeatus_domain.zip'>Download domain sequences</a>");
+
+                                d.add(18,108,'Oryzias latipes');
+                                d.add(300107,18,"<a href='./download/protein/Oryzias_latipes.zip' download='Oryzias_latipes.zip'>Download protein sequences</a>");
+                                d.add(300108,18,"<a href='./download/dna/Oryzias_latipes.zip' download='Oryzias_latipes.zip'>Download dna sequences</a>");
+                                //d.add(300109,18,"<a href='./download/domain/Oryzias_latipes_domain.zip' download='Oryzias_latipes_domain.zip'>Download domain sequences</a>");
+
+                                d.add(19,108,'Danio rerio');
+                                d.add(300109,19,"<a href='./download/protein/Danio_rerio.zip' download='Danio_rerio.zip'>Download protein sequences</a>");
+                                d.add(300110,19,"<a href='./download/dna/Danio_rerio.zip' download='Danio_rerio.zip'>Download dna sequences</a>");
+                                //d.add(300111,19,"<a href='./download/domain/Danio_rerio_domain.zip' download='Danio_rerio_domain.zip'>Download domain sequences</a>");
+
+
+                                d.add(95,108,'Astyanax mexicanus');
+                                d.add(300111,95,"<a href='./download/protein/Astyanax_mexicanus.zip' download='Astyanax_mexicanus.zip'>Download protein sequences</a>");
+                                d.add(300112,95,"<a href='./download/dna/Astyanax_mexicanus.zip' download='Astyanax_mexicanus.zip'>Download dna sequences</a>");
+                                //d.add(300113,95,"<a href='./download/domain/Astyanax_mexicanus_domain.zip' download='Astyanax_mexicanus_domain.zip'>Download domain sequences</a>");
+
+                                d.add(75,108,'Poecilia formosa');
+                                d.add(300113,75,"<a href='./download/protein/Poecilia_formosa.zip' download='Poecilia_formosa.zip'>Download protein sequences</a>");
+                                d.add(300114,75,"<a href='./download/dna/Poecilia_formosa.zip' download='Poecilia_formosa.zip'>Download dna sequences</a>");
+                                //d.add(300115,75,"<a href='./download/domain/Poecilia_formosa_domain.zip' download='Poecilia_formosa_domain.zip'>Download domain sequences</a>");
+
+                                d.add(69,108,'Xiphophorus maculatus');
+                                d.add(300115,69,"<a href='./download/protein/Xiphophorus_maculatus.zip' download='Xiphophorus_maculatus.zip'>Download protein sequences</a>");
+                                d.add(300116,69,"<a href='./download/dna/Xiphophorus_maculatus.zip' download='Xiphophorus_maculatus.zip'>Download dna sequences</a>");
+                                //d.add(300117,69,"<a href='./download/domain/Xiphophorus_maculatus_domain.zip' download='Xiphophorus_maculatus_domain.zip'>Download domain sequences</a>");
+
+                                d.add(79,108,'Gadus morhua');
+                                d.add(300117,79,"<a href='./download/protein/Gadus_morhua.zip' download='Gadus_morhua.zip'>Download protein sequences</a>");
+                                d.add(300118,79,"<a href='./download/dna/Gadus_morhua.zip' download='Gadus_morhua.zip'>Download dna sequences</a>");
+                                //d.add(300119,79,"<a href='./download/domain/Gadus_morhua_domain.zip' download='Gadus_morhua_domain.zip'>Download domain sequences</a>");
+
+                                d.add(89,108,'Oreochromis niloticus');
+                                d.add(300119,89,"<a href='./download/protein/Oreochromis_niloticus.zip' download='Oreochromis_niloticus.zip'>Download protein sequences</a>");
+                                d.add(300120,89,"<a href='./download/dna/Oreochromis_niloticus.zip' download='Oreochromis_niloticus.zip'>Download dna sequences</a>");
+                                //d.add(300121,89,"<a href='./download/domain/Oreochromis_niloticus_domain.zip' download='Oreochromis_niloticus_domain.zip'>Download domain sequences</a>");
+
+                                d.add(76,108,'Lepisosteus oculatus');
+                                d.add(300121,76,"<a href='./download/protein/Lepisosteus_oculatus.zip' download='Lepisosteus_oculatus.zip'>Download protein sequences</a>");
+                                d.add(300122,76,"<a href='./download/dna/Lepisosteus_oculatus.zip' download='Lepisosteus_oculatus.zip'>Download dna sequences</a>");
+                                //d.add(300123,76,"<a href='./download/domain/Lepisosteus_oculatus_domain.zip' download='Lepisosteus_oculatus_domain.zip'>Download domain sequences</a>");
+
+                                d.add(77,108,'Latimeria chalumnae');
+                                d.add(300123,77,"<a href='./download/protein/Latimeria_chalumnae.zip' download='Latimeria_chalumnae.zip'>Download protein sequences</a>");
+                                d.add(300124,77,"<a href='./download/dna/Latimeria_chalumnae.zip' download='Latimeria_chalumnae.zip'>Download dna sequences</a>");
+                                //d.add(300125,77,"<a href='./download/domain/Latimeria_chalumnae_domain.zip' download='Latimeria_chalumnae_domain.zip'>Download domain sequences</a>");
+
+                                d.add(60,109,'Petromyzon marinus');
+                                d.add(300125,60,"<a href='./download/protein/Petromyzon_marinus.zip' download='Petromyzon_marinus.zip'>Download protein sequences</a>");
+                                d.add(300126,60,"<a href='./download/dna/Petromyzon_marinus.zip' download='Petromyzon_marinus.zip'>Download dna sequences</a>");
+                                //d.add(300127,60,"<a href='./download/domain/Petromyzon_marinus_domain.zip' download='Petromyzon_marinus_domain.zip'>Download domain sequences</a>");
+
+                                d.add(59,109,'Ciona savignyi');
+                                d.add(300127,59,"<a href='./download/protein/Ciona_savignyi.zip' download='Ciona_savignyi.zip'>Download protein sequences</a>");
+                                d.add(300128,59,"<a href='./download/dna/Ciona_savignyi.zip' download='Ciona_savignyi.zip'>Download dna sequences</a>");
+                                //d.add(300129,59,"<a href='./download/domain/Ciona_savignyi_domain.zip' download='Ciona_savignyi_domain.zip'>Download domain sequences</a>");
+
+                                d.add(58,109,'Ciona intestinalis');
+                                d.add(300129,58,"<a href='./download/protein/Ciona_intestinalis.zip' download='Ciona_intestinalis.zip'>Download protein sequences</a>");
+                                d.add(300130,58,"<a href='./download/dna/Ciona_intestinalis.zip' download='Ciona_intestinalis.zip'>Download dna sequences</a>");
+                                //d.add(300131,58,"<a href='./download/domain/Ciona_intestinalis_domain.zip' download='Ciona_intestinalis_domain.zip'>Download domain sequences</a>");
+
+                                d.add(93,109,'Latimeria chalumnae');
+                                d.add(300131,93,"<a href='./download/protein/Latimeria_chalumnae.zip' download='Latimeria_chalumnae.zip'>Download protein sequences</a>");
+                                d.add(300132,93,"<a href='./download/dna/Latimeria_chalumnae.zip' download='Latimeria_chalumnae.zip'>Download dna sequences</a>");
+                                //d.add(300133,93,"<a href='./download/domain/Latimeria_chalumnae_domain.zip' download='Latimeria_chalumnae_domain.zip'>Download domain sequences</a>");
+
+                                d.add(94,110,'Drosophila melanogaster');
+                                d.add(300133,94,"<a href='./download/protein/Drosophila_melanogaster.zip' download='Drosophila_melanogaster.zip'>Download protein sequences</a>");
+                                d.add(300134,94,"<a href='./download/dna/Drosophila_melanogaster.zip' download='Drosophila_melanogaster.zip'>Download dna sequences</a>");
+                                //d.add(300135,94,"<a href='./download/domain/Drosophila_melanogaster_domain.zip' download='Drosophila_melanogaster_domain.zip'>Download domain sequences</a>");
+
+                                d.add(61,110,'Caenorhabditis elegans');
+                                d.add(300135,61,"<a href='./download/protein/Caenorhabditis_elegans.zip' download='Caenorhabditis_elegans.zip'>Download protein sequences</a>");
+                                d.add(300136,61,"<a href='./download/dna/Caenorhabditis_elegans.zip' download='Caenorhabditis_elegans.zip'>Download dna sequences</a>");
+                                //d.add(300137,61,"<a href='./download/domain/Caenorhabditis_elegans_domain.zip' download='Caenorhabditis_elegans_domain.zip'>Download domain sequences</a>");
+
+                                document.write(d);
+
+
+
+                            </script>
+                        </div>
+                    </td>
+
+                    <td  width='50%' valign='top'>
+                        <div class="dtree" style="border:hidden">
+                            <p><a href="javascript: dtreePlants.openAll();">Open all</a> | <a href="javascript: dtreePlants.closeAll();">Close all</a></p>
+
+
+                            <script type="text/javascript">
+                                dtreePlants = new dTree('dtreePlants');
+                                dtreePlants.add(3,-1,'Plants tree');
+
+                                //Plants
+                                //Liliopsida
+                                dtreePlants.add(308,3,'Total');
+
+                                dtreePlants.add(308001,308,"<a href='./download/protein/Plants.zip' download='Plants.zip'>Download protein sequences</a>");
+                                dtreePlants.add(308002,308,"<a href='./download/dna/Plants.zip' download='Plants.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(308003,308,"<a href='./download/domain/Plants_domain.zip' download='Plants_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(301,3,'Liliopsida');
+
+                                dtreePlants.add(301001,301,'Aegilops tauschii');
+                                dtreePlants.add(1001,301001,"<a href='./download/protein/Aegilops_tauschii.zip' download='Aegilops_tauschii.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1002,301001,"<a href='./download/dna/Aegilops_tauschii.zip' download='Aegilops_tauschii.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1003,301001,"<a href='./download/domain/Aegilops_tauschii_domain.zip' download='Aegilops_tauschii_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(301003,301,'Brachypodium distachyon');
+                                dtreePlants.add(1003,301003,"<a href='./download/protein/Brachypodium_distachyon.zip' download='Brachypodium_distachyon.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1004,301003,"<a href='./download/dna/Brachypodium_distachyon.zip' download='Brachypodium_distachyon.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1005,301003,"<a href='./download/domain/Brachypodium_distachyon_domain.zip' download='Brachypodium_distachyon_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(301005,301,'Hordeum vulgare');
+                                dtreePlants.add(1005,301005,"<a href='./download/protein/Hordeum_vulgare.zip' download='Hordeum_vulgare.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1006,301005,"<a href='./download/dna/Hordeum_vulgare.zip' download='Hordeum_vulgare.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1007,301005,"<a href='./download/domain/Hordeum_vulgare_domain.zip' download='Hordeum_vulgare_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(301007,301,'Musa acuminata');
+                                dtreePlants.add(1007,301007,"<a href='./download/protein/Musa_acuminata.zip' download='Musa_acuminata.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1008,301007,"<a href='./download/dna/Musa_acuminata.zip' download='Musa_acuminata.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1009,301007,"<a href='./download/domain/Musa_acuminata_domain.zip' download='Musa_acuminata_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(301009,301,'Oryza barthii');
+                                dtreePlants.add(1009,301009,"<a href='./download/protein/Oryza_barthii.zip' download='Oryza_barthii.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1010,301009,"<a href='./download/dna/Oryza_barthii.zip' download='Oryza_barthii.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1011,301009,"<a href='./download/domain/Oryza_barthii_domain.zip' download='Oryza_barthii_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(301011,301,'Oryza brachyantha');
+                                dtreePlants.add(1011,301011,"<a href='./download/protein/Oryza_brachyantha.zip' download='Oryza_brachyantha.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1012,301011,"<a href='./download/dna/Oryza_brachyantha.zip' download='Oryza_brachyantha.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1013,301011,"<a href='./download/domain/Oryza_brachyantha_domain.zip' download='Oryza_brachyantha_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(301013,301,'Oryza glaberrima');
+                                dtreePlants.add(1013,301013,"<a href='./download/protein/Oryza_glaberrima.zip' download='Oryza_glaberrima.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1014,301013,"<a href='./download/dna/Oryza_glaberrima.zip' download='Oryza_glaberrima.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1015,301013,"<a href='./download/domain/Oryza_glaberrima_domain.zip' download='Oryza_glaberrima_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(301015,301,'Oryza glumaepatula');
+                                dtreePlants.add(1015,301015,"<a href='./download/protein/Oryza_glumaepatula.zip' download='Oryza_glumaepatula.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1016,301015,"<a href='./download/dna/Oryza_glumaepatula.zip' download='Oryza_glumaepatula.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1017,301015,"<a href='./download/domain/Oryza_glumaepatula_domain.zip' download='Oryza_glumaepatula_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(301017,301,'Oryza meridionalis');
+                                dtreePlants.add(1017,301017,"<a href='./download/protein/Oryza_meridionalis.zip' download='Oryza_meridionalis.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1018,301017,"<a href='./download/dna/Oryza_meridionalis.zip' download='Oryza_meridionalis.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1019,301017,"<a href='./download/domain/Oryza_meridionalis_domain.zip' download='Oryza_meridionalis_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(301019,301,'Oryza nivara');
+                                dtreePlants.add(1019,301019,"<a href='./download/protein/Oryza_nivara.zip' download='Oryza_nivara.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1020,301019,"<a href='./download/dna/Oryza_nivara.zip' download='Oryza_nivara.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1021,301019,"<a href='./download/domain/Oryza_nivara_domain.zip' download='Oryza_nivara_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(301021,301,'Oryza punctata');
+                                dtreePlants.add(1021,301021,"<a href='./download/protein/Oryza_punctata.zip' download='Oryza_punctata.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1022,301021,"<a href='./download/dna/Oryza_punctata.zip' download='Oryza_punctata.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1023,301021,"<a href='./download/domain/Oryza_punctata_domain.zip' download='Oryza_punctata_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(301023,301,'Oryza sativa subsp.indica');
+                                dtreePlants.add(1023,301023,"<a href='./download/protein/Oryza_indica.zip' download='Oryza_indica.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1024,301023,"<a href='./download/dna/Oryza_indica.zip' download='Oryza_indica.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1025,301023,"<a href='./download/domain/Oryza_indica_domain.zip' download='Oryza_indica_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(301025,301,'Oryza sativa subsp.japonica');
+                                dtreePlants.add(1025,301025,"<a href='./download/protein/Oryza_sativa.zip' download='Oryza_sativa.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1026,301025,"<a href='./download/dna/Oryza_sativa.zip' download='Oryza_sativa.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1027,301025,"<a href='./download/domain/Oryza_sativa_domain.zip' download='Oryza_sativa_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(301027,301,'Setaria italica');
+                                dtreePlants.add(1027,301027,"<a href='./download/protein/Setaria_italica.zip' download='Setaria_italica.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1028,301027,"<a href='./download/dna/Setaria_italica.zip' download='Setaria_italica.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1029,301027,"<a href='./download/domain/Setaria_italica_domain.zip' download='Setaria_italica_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(301029,301,'Sorghum bicolor');
+                                dtreePlants.add(1029,301029,"<a href='./download/protein/Sorghum_bicolor.zip' download='Sorghum_bicolor.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1030,301029,"<a href='./download/dna/Sorghum_bicolor.zip' download='Sorghum_bicolor.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1031,301029,"<a href='./download/domain/Sorghum_bicolor_domain.zip' download='Sorghum_bicolor_domain.zip'>Download domain sequences</a>");
+
+
+                                dtreePlants.add(301031,301,'Triticum aestivum');
+                                dtreePlants.add(1031,301031,"<a href='./download/protein/Triticum_aestivum.zip' download='Triticum_aestivum.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1032,301031,"<a href='./download/dna/Triticum_aestivum.zip' download='Triticum_aestivum.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1033,301031,"<a href='./download/domain/Triticum_aestivum_domain.zip' download='Triticum_aestivum_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(301033,301,'Triticum urartu');
+                                dtreePlants.add(1033,301033,"<a href='./download/protein/Triticum_urartu.zip' download='Triticum_urartu.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1034,301033,"<a href='./download/dna/Triticum_urartu.zip' download='Triticum_urartu.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1035,301033,"<a href='./download/domain/Triticum_urartu_domain.zip' download='Triticum_urartu_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(301035,301,'Zea mays');
+                                dtreePlants.add(1035,301035,"<a href='./download/protein/Zea_mays.zip' download='Zea_mays.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1036,301035,"<a href='./download/dna/Zea_mays.zip' download='Zea_mays.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1037,301035,"<a href='./download/domain/Zea_mays_domain.zip' download='Zea_mays_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(301037,301,'Leersia perrieri');
+                                dtreePlants.add(1037,301037,"<a href='./download/protein/Leersia_perrieri.zip' download='Leersia_perrieri.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1038,301037,"<a href='./download/dna/Leersia_perrieri.zip' download='Leersia_perrieri.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1039,301037,"<a href='./download/domain/Leersia_perrieri_domain.zip' download='Leersia_perrieri_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(301039,301,'Oryza longistaminata');
+                                dtreePlants.add(1039,301039,"<a href='./download/protein/Oryza_longistaminata.zip' download='Oryza_longistaminata.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1040,301039,"<a href='./download/dna/Oryza_longistaminata.zip' download='Oryza_longistaminata.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1041,301039,"<a href='./download/domain/Oryza_longistaminata_domain.zip' download='Oryza_longistaminata_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(301041,301,'Oryza rufipogon');
+                                dtreePlants.add(1041,301041,"<a href='./download/protein/Oryza_rufipogon.zip' download='Oryza_rufipogon.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1042,301041,"<a href='./download/dna/Oryza_rufipogon.zip' download='Oryza_rufipogon.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1043,301041,"<a href='./download/domain/Oryza_rufipogon_domain.zip' download='Oryza_rufipogon_domain.zip'>Download domain sequences</a>");
+
+
+                                //Eudicotyledons
+                                dtreePlants.add(302,3,'Eudicotyledons');
+
+                                dtreePlants.add(302001,302,'Arabidopsis lyrata');
+                                dtreePlants.add(1043,302001,"<a href='./download/protein/Arabidopsis_lyrata.zip' download='Arabidopsis_lyrata.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1044,302001,"<a href='./download/dna/Arabidopsis_lyrata.zip' download='Arabidopsis_lyrata.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1045,302001,"<a href='./download/domain/Arabidopsis_lyrata_domain.zip' download='Arabidopsis_lyrata_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(302002,302,'Arabidopsis thaliana');
+                                dtreePlants.add(1045,302002,"<a href='./download/protein/Arabidopsis_thaliana.zip' download='Arabidopsis_thaliana.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1046,302002,"<a href='./download/dna/Arabidopsis_thaliana.zip' download='Arabidopsis_thaliana.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1047,302002,"<a href='./download/domain/Arabidopsis_thaliana_domain.zip' download='Arabidopsis_thaliana_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(302003,302,'Brassica rapa');
+                                dtreePlants.add(1047,302003,"<a href='./download/protein/Brassica_rapa.zip' download='Brassica_rapa.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1048,302003,"<a href='./download/dna/Brassica_rapa.zip' download='Brassica_rapa.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1049,302003,"<a href='./download/domain/Brassica_rapa_domain.zip' download='Brassica_rapa_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(302004,302,'Glycine max');
+                                dtreePlants.add(1049,302004,"<a href='./download/protein/Glycine_max.zip' download='Glycine_max.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1050,302004,"<a href='./download/dna/Glycine_max.zip' download='Glycine_max.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1051,302004,"<a href='./download/domain/Glycine_max_domain.zip' download='Glycine_max_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(302005,302,'Medicago truncatula');
+                                dtreePlants.add(1051,302005,"<a href='./download/protein/Medicago_truncatula.zip' download='Medicago_truncatula.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1052,302005,"<a href='./download/dna/Medicago_truncatula.zip' download='Medicago_truncatula.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1053,302005,"<a href='./download/domain/Medicago_truncatula_domain.zip' download='Medicago_truncatula_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(302006,302,'Populus trichocarpa');
+                                dtreePlants.add(1053,302006,"<a href='./download/protein/Populus_trichocarpa.zip' download='Populus_trichocarpa.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1054,302006,"<a href='./download/dna/Populus_trichocarpa.zip' download='Populus_trichocarpa.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1055,302006,"<a href='./download/domain/Populus_trichocarpa_domain.zip' download='Populus_trichocarpa_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(302007,302,'Prunus persica');
+                                dtreePlants.add(1055,302007,"<a href='./download/protein/Prunus_persica.zip' download='Prunus_persica.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1056,302007,"<a href='./download/dna/Prunus_persica.zip' download='Prunus_persica.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1057,302007,"<a href='./download/domain/Prunus_persica_domain.zip' download='Prunus_persica_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(302008,302,'Solanum lycopersicum');
+                                dtreePlants.add(1057,302008,"<a href='./download/protein/Solanum_lycopersicum.zip' download='Solanum_lycopersicum.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1058,302008,"<a href='./download/dna/Solanum_lycopersicum.zip' download='Solanum_lycopersicum.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1059,302008,"<a href='./download/domain/Solanum_lycopersicum_domain.zip' download='Solanum_lycopersicum_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(302009,302,'Solanum tuberosum');
+                                dtreePlants.add(1059,302009,"<a href='./download/protein/Solanum_tuberosum.zip' download='Solanum_tuberosum.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1060,302009,"<a href='./download/dna/Solanum_tuberosum.zip' download='Solanum_tuberosum.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1061,302009,"<a href='./download/domain/Solanum_tuberosum_domain.zip' download='Solanum_tuberosum_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(302010,302,'Vitis vinifera');
+                                dtreePlants.add(1061,302010,"<a href='./download/protein/Vitis_vinifera.zip' download='Vitis_vinifera.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1062,302010,"<a href='./download/dna/Vitis_vinifera.zip' download='Vitis_vinifera.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1063,302010,"<a href='./download/domain/Vitis_vinifera_domain.zip' download='Vitis_vinifera_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(302011,302,'Brassica oleracea');
+                                dtreePlants.add(1063,302011,"<a href='./download/protein/Brassica_oleracea.zip' download='Brassica_oleracea.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1064,302011,"<a href='./download/dna/Brassica_oleracea.zip' download='Brassica_oleracea.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1065,302011,"<a href='./download/domain/Brassica_oleracea_domain.zip' download='Brassica_oleracea_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(302012,302,'Theobroma cacao');
+                                dtreePlants.add(1065,302012,"<a href='./download/protein/Theobroma_cacao.zip' download='Theobroma_cacao.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1066,302012,"<a href='./download/dna/Theobroma_cacao.zip' download='Theobroma_cacao.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1067,302012,"<a href='./download/domain/Theobroma_cacao_domain.zip' download='Theobroma_cacao_domain.zip'>Download domain sequences</a>");
+
+                                //LycopodiophytaNEWPLANT
+                                dtreePlants.add(255,302,'Dioscorea rotundata');
+                                dtreePlants.add(1065,255,"<a href='./download/protein/Dioscorea_rotundata.zip' download='Dioscorea_rotundata.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1066,255,"<a href='./download/dna/Dioscorea_rotundata.zip' download='Dioscorea_rotundata.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1067,255,"<a href='./download/domain/Dioscorea_rotundata_domain.zip' download='Dioscorea_rotundata_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(256,302,'Manihot esculenta');
+                                dtreePlants.add(1065,256,"<a href='./download/protein/Manihot_esculenta.zip' download='Manihot_esculenta.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1066,256,"<a href='./download/dna/Manihot_esculenta.zip' download='Manihot_esculenta.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1067,256,"<a href='./download/domain/Manihot_esculenta_domain.zip' download='Manihot_esculenta_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(257,302,'Phaseolus vulgaris');
+                                dtreePlants.add(1065,257,"<a href='./download/protein/Phaseolus_vulgaris.zip' download='Phaseolus_vulgaris.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1066,257,"<a href='./download/dna/Phaseolus_vulgaris.zip' download='Phaseolus_vulgaris.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1067,257,"<a href='./download/domain/Phaseolus_vulgaris_domain.zip' download='Phaseolus_vulgaris_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(258,302,'Gossypium raimondii');
+                                dtreePlants.add(1065,258,"<a href='./download/protein/Gossypium_raimondii.zip' download='Gossypium_raimondii.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1066,258,"<a href='./download/dna/Gossypium_raimondii.zip' download='Gossypium_raimondii.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1067,258,"<a href='./download/domain/Gossypium_raimondii_domain.zip' download='Gossypium_raimondii_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(259,302,'Lupinus angustifolius');
+                                dtreePlants.add(1065,259,"<a href='./download/protein/Lupinus_angustifolius.zip' download='Lupinus_angustifolius.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1066,259,"<a href='./download/dna/Lupinus_angustifolius.zip' download='Lupinus_angustifolius.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1067,259,"<a href='./download/domain/Lupinus_angustifolius_domain.zip' download='Lupinus_angustifolius_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(260,302,'Nicotiana attenuata');
+                                dtreePlants.add(1065,260,"<a href='./download/protein/Nicotiana_attenuata.zip' download='Nicotiana_attenuata.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1066,260,"<a href='./download/dna/Nicotiana_attenuata.zip' download='Nicotiana_attenuata.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1067,260,"<a href='./download/domain/Nicotiana_attenuata_domain.zip' download='Nicotiana_attenuata_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(261,302,'Cucumis sativus');
+                                dtreePlants.add(1065,261,"<a href='./download/protein/Cucumis_sativus.zip' download='Cucumis_sativus.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1066,261,"<a href='./download/dna/Cucumis_sativus.zip' download='Cucumis_sativus.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1067,261,"<a href='./download/domain/Cucumis_sativus_domain.zip' download='Cucumis_sativus_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(262,302,'Helianthus annuus');
+                                dtreePlants.add(1065,262,"<a href='./download/protein/Helianthus_annuus.zip' download='Helianthus_annuus.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1066,262,"<a href='./download/dna/Helianthus_annuus.zip' download='Helianthus_annuus.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1067,262,"<a href='./download/domain/Helianthus_annuus_domain.zip' download='Helianthus_annuus_domain.zip'>Download domain sequences</a>");
+
+                                //Lycopodiophyta
+                                dtreePlants.add(303,3,'Lycopodiophyta');
+
+                                dtreePlants.add(303001,303,'Selaginella moellendorffii');
+                                dtreePlants.add(1067,303001,"<a href='./download/protein/Selaginella_moellendorffii.zip' download='Selaginella_moellendorffii.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1068,303001,"<a href='./download/dna/Selaginella_moellendorffii.zip' download='Selaginella_moellendorffii.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1069,303001,"<a href='./download/domain/Selaginella_moellendorffii_domain.zip' download='Selaginella_moellendorffii_domain.zip'>Download domain sequences</a>");
+
+
+                                //Bryophyta
+                                dtreePlants.add(304,3,'Bryophyta');
+
+                                dtreePlants.add(304001,304,'Physcomitrella patens');
+                                dtreePlants.add(1069,304001,"<a href='./download/protein/Physcomitrella_patens.zip' download='Physcomitrella_patens.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1070,304001,"<a href='./download/dna/Physcomitrella_patens.zip' download='Physcomitrella_patens.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1071,304001,"<a href='./download/domain/Physcomitrella_patens_domain.zip' download='Physcomitrella_patens_domain.zip'>Download domain sequences</a>");
+
+                                //Chlorophyta
+                                dtreePlants.add(305,3,'Chlorophyta');
+
+                                dtreePlants.add(305001,305,'Chlamydomonas reinhardtii');
+                                dtreePlants.add(1071,305001,"<a href='./download/protein/Chlamydomonas_reinhardtii.zip' download='Chlamydomonas_reinhardtii.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1072,305001,"<a href='./download/dna/Chlamydomonas_reinhardtii.zip' download='Chlamydomonas_reinhardtii.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1073,305001,"<a href='./download/domain/Chlamydomonas_reinhardtii_domain.zip' download='Chlamydomonas_reinhardtii_domain.zip'>Download domain sequences</a>");
+
+                                dtreePlants.add(305002,305,'Ostreococcus lucimarinus');
+                                dtreePlants.add(1073,305002,"<a href='./download/protein/Ostreococcus_lucimarinus.zip' download='Ostreococcus_lucimarinus.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1074,305002,"<a href='./download/dna/Ostreococcus_lucimarinus.zip' download='Ostreococcus_lucimarinus.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1075,305002,"<a href='./download/domain/Ostreococcus_lucimarinus_domain.zip' download='Ostreococcus_lucimarinus_domain.zip'>Download domain sequences</a>");
+
+                                //Rhodophyta
+                                dtreePlants.add(306,3,'Rhodophyta');
+
+                                dtreePlants.add(306001,306,'Cyanidioschyzon merolae');
+                                dtreePlants.add(1075,306001,"<a href='./download/protein/Cyanidioschyzon_merolae.zip' download='Cyanidioschyzon_merolae.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1076,306001,"<a href='./download/dna/Cyanidioschyzon_merolae.zip' download='Cyanidioschyzon_merolae.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1077,306001,"<a href='./download/domain/Cyanidioschyzon_merolae_domain.zip' download='Cyanidioschyzon_merolae_domain.zip'>Download domain sequences</a>");
+
+                                //Amborellales
+                                dtreePlants.add(307,3,'Amborellales');
+
+                                dtreePlants.add(307001,307,'Amborella trichopoda');
+                                dtreePlants.add(1077,307001,"<a href='./download/protein/Amborella_trichopoda.zip' download='Amborella_trichopoda.zip'>Download protein sequences</a>");
+                                dtreePlants.add(1078,307001,"<a href='./download/dna/Amborella_trichopoda.zip' download='Amborella_trichopoda.zip'>Download dna sequences</a>");
+                                //dtreePlants.add(1079,307001,"<a href='./download/domain/Amborella_trichopoda_domain.zip' download='Amborella_trichopoda_domain.zip'>Download domain sequences</a>");
+
+                                document.write(dtreePlants);
+
+
+                            </script>
+                        </div>
+                    </td>
+                    <td valign="top" width='50%' align="left" >
+                        <div class="dtree" style="border:hidden">
+                            <p><a href="javascript: dtreeFungi.openAll();">Open all</a> | <a href="javascript: dtreeFungi.closeAll();">Close all</a></p>
+
+                            <script type="text/javascript">
+                                dtreeFungi = new dTree('dtreeFungi');
+                                dtreeFungi.add(2,-1,'Fungi tree');
+
+                                dtreeFungi.add(218,2,'Total');
+
+                                dtreeFungi.add(218001,218,"<a href='./download/protein/Fungi.zip' download='Fungi.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(218002,218,"<a href='./download/dna/Fungi.zip' download='Fungi.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(218003,218,"<a href='./download/domain/Fungi_domain.zip' download='Fungi_domain.zip'>Download domain sequences</a>");
+
+                                //Fungi
+                                //Capnodiales
+                                dtreeFungi.add(201,2,'Capnodiales');
+                                dtreeFungi.add(201001,201,'Zymoseptoria tritici');
+                                dtreeFungi.add(1001,201001,"<a href='./download/protein/Zymoseptoria_tritici.zip' download='Zymoseptoria_tritici.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1002,201001,"<a href='./download/dna/Zymoseptoria_tritici.zip' download='Zymoseptoria_tritici.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1003,201001,"<a href='./download/domain/Zymoseptoria_tritici_domain.zip' download='Zymoseptoria_tritici_domain.zip'>Download domain sequences</a>");
+                                dtreeFungi.add(201002,201,'Dothistroma septosporum');
+                                dtreeFungi.add(1001,201002,"<a href='./download/protein/Dothistroma_septosporum.zip' download='Dothistroma_septosporum.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1002,201002,"<a href='./download/dna/Dothistroma_septosporum.zip' download='Dothistroma_septosporum.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1003,201002,"<a href='./download/domain/Dothistroma_septosporum_domain.zip' download='Dothistroma_septosporum_domain.zip'>Download domain sequences</a>");
+
+                                //Microbotryales
+                                dtreeFungi.add(202,2,'Microbotryales');
+                                dtreeFungi.add(202001,202,'Microbotryum violaceum');
+                                dtreeFungi.add(1003,202001,"<a href='./download/protein/Microbotryum_violaceum.zip' download='Microbotryum_violaceum.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1004,202001,"<a href='./download/dna/Microbotryum_violaceum.zip' download='Microbotryum_violaceum.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1005,202001,"<a href='./download/domain/Microbotryum_violaceum_domain.zip' download='Microbotryum_violaceum_domain.zip'>Download domain sequences</a>");
+
+                                //Eurotiomycetes
+                                dtreeFungi.add(204,2,'Eurotiomycetes');
+                                dtreeFungi.add(204001,204,'Aspergillus clavatus');
+                                dtreeFungi.add(1005,204001,"<a href='./download/protein/Aspergillus_clavatus.zip' download='Aspergillus_clavatus.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1006,204001,"<a href='./download/dna/Aspergillus_clavatus.zip' download='Aspergillus_clavatus.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1007,204001,"<a href='./download/domain/Aspergillus_clavatus_domain.zip' download='Aspergillus_clavatus_domain.zip'>Download domain sequences</a>");
+
+                                dtreeFungi.add(204002,204,'Aspergillus flavus');
+                                dtreeFungi.add(1007,204002,"<a href='./download/protein/Aspergillus_flavus.zip' download='Aspergillus_flavus.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1008,204002,"<a href='./download/dna/Aspergillus_flavus.zip' download='Aspergillus_flavus.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1009,204002,"<a href='./download/domain/Aspergillus_flavus_domain.zip' download='Aspergillus_flavus_domain.zip'>Download domain sequences</a>");
+
+                                dtreeFungi.add(204003,204,'Aspergillus fumigatus');
+                                dtreeFungi.add(1009,204003,"<a href='./download/protein/Aspergillus_fumigatus.zip' download='Aspergillus_fumigatus.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1010,204003,"<a href='./download/dna/Aspergillus_fumigatus.zip' download='Aspergillus_fumigatus.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1011,204003,"<a href='./download/domain/Aspergillus_fumigatus_domain.zip' download='Aspergillus_fumigatus_domain.zip'>Download domain sequences</a>");
+
+                                dtreeFungi.add(204005,204,'Aspergillus nidulans');
+                                dtreeFungi.add(1011,204005,"<a href='./download/protein/Aspergillus_nidulans.zip' download='Aspergillus_nidulans.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1012,204005,"<a href='./download/dna/Aspergillus_nidulans.zip' download='Aspergillus_nidulans.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1013,204005,"<a href='./download/domain/Aspergillus_nidulans_domain.zip' download='Aspergillus_nidulans_domain.zip'>Download domain sequences</a>");
+
+                                dtreeFungi.add(204006,204,'Aspergillus niger');
+                                dtreeFungi.add(1013,204006,"<a href='./download/protein/Aspergillus_niger.zip' download='Aspergillus_niger.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1014,204006,"<a href='./download/dna/Aspergillus_niger.zip' download='Aspergillus_niger.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1015,204006,"<a href='./download/domain/Aspergillus_niger_domain.zip' download='Aspergillus_niger_domain.zip'>Download domain sequences</a>");
+
+                                dtreeFungi.add(204007,204,'Aspergillus oryzae');
+                                dtreeFungi.add(1015,204007,"<a href='./download/protein/Aspergillus_oryzae.zip' download='Aspergillus_oryzae.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1016,204007,"<a href='./download/dna/Aspergillus_oryzae.zip' download='Aspergillus_oryzae.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1017,204007,"<a href='./download/domain/Aspergillus_oryzae_domain.zip' download='Aspergillus_oryzae_domain.zip'>Download domain sequences</a>");
+
+                                dtreeFungi.add(204008,204,'Aspergillus terreus');
+                                dtreeFungi.add(1017,204008,"<a href='./download/protein/Aspergillus_terreus.zip' download='Aspergillus_terreus.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1018,204008,"<a href='./download/dna/Aspergillus_terreus.zip' download='Aspergillus_terreus.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1019,204008,"<a href='./download/domain/Aspergillus_terreus_domain.zip' download='Aspergillus_terreus_domain.zip'>Download domain sequences</a>");
+
+                                dtreeFungi.add(204009,204,'Neosartorya fischeri');
+                                dtreeFungi.add(1019,204009,"<a href='./download/protein/Neosartorya_fischeri.zip' download='Neosartorya_fischeri.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1020,204009,"<a href='./download/dna/Neosartorya_fischeri.zip' download='Neosartorya_fischeri.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1021,204009,"<a href='./download/domain/Neosartorya_fischeri_domain.zip' download='Neosartorya_fischeri_domain.zip'>Download domain sequences</a>");
+
+                                //Glomerellales
+                                dtreeFungi.add(205,2,'Glomerellales');
+                                dtreeFungi.add(205002,205,'Verticillium dahliae');
+                                dtreeFungi.add(1021,205002,"<a href='./download/protein/Verticillium_dahliae.zip' download='Verticillium_dahliae.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1022,205002,"<a href='./download/dna/Verticillium_dahliae.zip' download='Verticillium_dahliae.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1023,205002,"<a href='./download/domain/Verticillium_dahliae_domain.zip' download='Verticillium_dahliae_domain.zip'>Download domain sequences</a>");
+
+                                dtreeFungi.add(205003,205,'Colletotrichum higginsianum');
+                                dtreeFungi.add(1022,205003,"<a href='./download/protein/Colletotrichum_higginsianum.zip' download='Colletotrichum_higginsianum.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1023,205003,"<a href='./download/dna/Colletotrichum_higginsianum.zip' download='Colletotrichum_higginsianum.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1024,205003,"<a href='./download/domain/Colletotrichum_higginsianum_domain.zip' download='Colletotrichum_higginsianum_domain.zip'>Download domain sequences</a>");
+
+
+                                dtreeFungi.add(256,205,'Colletotrichum orbiculare');
+                                dtreeFungi.add(1022,256,"<a href='./download/protein/Colletotrichum_orbiculare.zip' download='Colletotrichum_orbiculare.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1023,256,"<a href='./download/dna/Colletotrichum_orbiculare.zip' download='Colletotrichum_orbiculare.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1024,256,"<a href='./download/domain/Colletotrichum_orbiculare_domain.zip' download='Colletotrichum_orbiculare_domain.zip'>Download domain sequences</a>");
+
+                                //Hypocreales
+                                dtreeFungi.add(206,2,'Hypocreales');
+
+                                dtreeFungi.add(206001,206,'Fusarium oxysporum');
+                                dtreeFungi.add(1023,206001,"<a href='./download/protein/Fusarium_oxysporum.zip' download='Fusarium_oxysporum.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1024,206001,"<a href='./download/dna/Fusarium_oxysporum.zip' download='Fusarium_oxysporum.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1025,206001,"<a href='./download/domain/Fusarium_oxysporum_domain.zip' download='Fusarium_oxysporum_domain.zip'>Download domain sequences</a>");
+
+                                dtreeFungi.add(2060022,206,'Beauveria bassiana');
+                                dtreeFungi.add(1024,2060022,"<a href='./download/protein/Beauveria_bassiana.zip' download='Beauveria_bassiana.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1025,2060022,"<a href='./download/dna/Beauveria_bassiana.zip' download='Beauveria_bassiana.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1026,2060022,"<a href='./download/domain/Beauveria_bassiana_domain.zip' download='Beauveria_bassiana_domain.zip'>Download domain sequences</a>");
+
+                                dtreeFungi.add(206005,206,'Trichoderma reesei');
+                                dtreeFungi.add(1025,206005,"<a href='./download/protein/Trichoderma_reesei.zip' download='Trichoderma_reesei.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1026,206005,"<a href='./download/dna/Trichoderma_reesei.zip' download='Trichoderma_reesei.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1027,206005,"<a href='./download/domain/Trichoderma_reesei_domain.zip' download='Trichoderma_reesei_domain.zip'>Download domain sequences</a>");
+
+                                dtreeFungi.add(206006,206,'Trichoderma virens');
+                                dtreeFungi.add(1027,206006,"<a href='./download/protein/Trichoderma_virens.zip' download='Trichoderma_virens.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1028,206006,"<a href='./download/dna/Trichoderma_virens.zip' download='Trichoderma_virens.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1029,206006,"<a href='./download/domain/Trichoderma_virens_domain.zip' download='Trichoderma_virens_domain.zip'>Download domain sequences</a>");
+
+
+                                dtreeFungi.add(255,206,'Fusarium pseudograminearum');
+                                dtreeFungi.add(1027,255,"<a href='./download/protein/Fusarium_pseudograminearum.zip' download='Fusarium_pseudograminearum.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1028,255,"<a href='./download/dna/Fusarium_pseudograminearum.zip' download='Fusarium_pseudograminearum.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1029,255,"<a href='./download/domain/Fusarium_pseudograminearum_domain.zip' download='Fusarium_pseudograminearum_domain.zip'>Download domain sequences</a>");
+
+                                //Pezizales
+                                dtreeFungi.add(207,2,'Pezizales');
+                                dtreeFungi.add(207001,207,'Tuber melanosporum');
+                                dtreeFungi.add(1029,207001,"<a href='./download/protein/Tuber_melanosporum.zip' download='Tuber_melanosporum.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1030,207001,"<a href='./download/dna/Tuber_melanosporum.zip' download='Tuber_melanosporum.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1031,207001,"<a href='./download/domain/Tuber_melanosporum_domain.zip' download='Tuber_melanosporum_domain.zip'>Download domain sequences</a>");
+
+                                //Pleosporales
+                                dtreeFungi.add(208,2,'Pleosporales');
+                                dtreeFungi.add(208001,208,'Leptosphaeria maculans');
+                                dtreeFungi.add(1031,208001,"<a href='./download/protein/Leptosphaeria_maculans.zip' download='Leptosphaeria_maculans.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1032,208001,"<a href='./download/dna/Leptosphaeria_maculans.zip' download='Leptosphaeria_maculans.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1033,208001,"<a href='./download/domain/Leptosphaeria_maculans_domain.zip' download='Leptosphaeria_maculans_domain.zip'>Download domain sequences</a>");
+
+                                dtreeFungi.add(208002,208,'Phaeosphaeria nodorum');
+                                dtreeFungi.add(1033,208002,"<a href='./download/protein/Phaeosphaeria_nodorum.zip' download='Phaeosphaeria_nodorum.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1034,208002,"<a href='./download/dna/Phaeosphaeria_nodorum.zip' download='Phaeosphaeria_nodorum.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1035,208002,"<a href='./download/domain/Phaeosphaeria_nodorum_domain.zip' download='Phaeosphaeria_nodorum_domain.zip'>Download domain sequences</a>");
+
+                                dtreeFungi.add(208003,208,'Pyrenophora teres');
+                                dtreeFungi.add(1035,208003,"<a href='./download/protein/Pyrenophora_teres.zip' download='Pyrenophora_teres.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1036,208003,"<a href='./download/dna/Pyrenophora_teres.zip' download='Pyrenophora_teres.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1037,208003,"<a href='./download/domain/Pyrenophora_teres_domain.zip' download='Pyrenophora_teres_domain.zip'>Download domain sequences</a>");
+
+                                dtreeFungi.add(208004,208,'Pyrenophora triticirepentis');
+                                dtreeFungi.add(1037,208004,"<a href='./download/protein/Pyrenophora_triticirepentis.zip' download='Pyrenophora_triticirepentis.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1038,208004,"<a href='./download/dna/Pyrenophora_triticirepentis.zip' download='Pyrenophora_triticirepentis.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1039,208004,"<a href='./download/domain/Pyrenophora_triticirepentis_domain.zip' download='Pyrenophora_triticirepentis_domain.zip'>Download domain sequences</a>");
+
+                                //Pucciniales
+                                dtreeFungi.add(209,2,'Pucciniales');
+                                dtreeFungi.add(209001,209,'Melampsora laricipopulina');
+                                dtreeFungi.add(1039,209001,"<a href='./download/protein/Melampsora_laricipopulina.zip' download='Melampsora_laricipopulina.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1040,209001,"<a href='./download/dna/Melampsora_laricipopulina.zip' download='Melampsora_laricipopulina.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1041,209001,"<a href='./download/domain/Melampsora_laricipopulina_domain.zip' download='Melampsora_laricipopulina_domain.zip'>Download domain sequences</a>");
+
+                                dtreeFungi.add(209002,209,'Puccinia graminis');
+                                dtreeFungi.add(1041,209002,"<a href='./download/protein/Puccinia_graminis.zip' download='Puccinia_graminis.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1042,209002,"<a href='./download/dna/Puccinia_graminis.zip' download='Puccinia_graminis.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1043,209002,"<a href='./download/domain/Puccinia_graminis_domain.zip' download='Puccinia_graminis_domain.zip'>Download domain sequences</a>");
+
+                                dtreeFungi.add(209003,209,'Puccinia triticina');
+                                dtreeFungi.add(1043,209003,"<a href='./download/protein/Puccinia_triticina.zip' download='Puccinia_triticina.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1044,209003,"<a href='./download/dna/Puccinia_triticina.zip' download='Puccinia_triticina.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1045,209003,"<a href='./download/domain/Puccinia_triticina_domain.zip' download='Puccinia_triticina_domain.zip'>Download domain sequences</a>");
+
+                                //Sordariales
+                                dtreeFungi.add(210,2,'Sordariales');
+                                dtreeFungi.add(210001,210,'Neurospora crassa');
+                                dtreeFungi.add(1045,210001,"<a href='./download/protein/Neurospora_crassa.zip' download='Neurospora_crassa.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1046,210001,"<a href='./download/dna/Neurospora_crassa.zip' download='Neurospora_crassa.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1047,210001,"<a href='./download/domain/Neurospora_crassa_domain.zip' download='Neurospora_crassa_domain.zip'>Download domain sequences</a>");
+
+                                //Magnaporthales
+                                dtreeFungi.add(211,2,'Magnaporthales');
+                                dtreeFungi.add(211001,211,'Gaeumannomyces graminis');
+                                dtreeFungi.add(1049,211001,"<a href='./download/protein/Gaeumannomyces_graminis.zip' download='Gaeumannomyces_graminis.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1050,211001,"<a href='./download/dna/Gaeumannomyces_graminis.zip' download='Gaeumannomyces_graminis.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1051,211001,"<a href='./download/domain/Gaeumannomyces_graminis_domain.zip' download='Gaeumannomyces_graminis_domain.zip'>Download domain sequences</a>");
+
+                                dtreeFungi.add(211002,211,'Magnaporthe oryzae');
+                                dtreeFungi.add(1051,211002,"<a href='./download/protein/Magnaporthe_oryzae.zip' download='Magnaporthe_oryzae.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1052,211002,"<a href='./download/dna/Magnaporthe_oryzae.zip' download='Magnaporthe_oryzae.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1053,211002,"<a href='./download/domain/Magnaporthe_oryzae_domain.zip' download='Magnaporthe_oryzae_domain.zip'>Download domain sequences</a>");
+
+                                dtreeFungi.add(211003,211,'Magnaporthe poae');
+                                dtreeFungi.add(1053,211003,"<a href='./download/protein/Magnaporthe_poae.zip' download='Magnaporthe_poae.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1054,211003,"<a href='./download/dna/Magnaporthe_poae.zip' download='Magnaporthe_poae.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1055,211003,"<a href='./download/domain/Magnaporthe_poae_domain.zip' download='Magnaporthe_poae_domain.zip'>Download domain sequences</a>");
+
+                                //Saccharomycetales
+                                dtreeFungi.add(212,2,'Saccharomycetales');
+                                dtreeFungi.add(212001,212,'Ashbya gossypii');
+                                dtreeFungi.add(1055,212001,"<a href='./download/protein/Ashbya_gossypii.zip' download='Ashbya_gossypii.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1056,212001,"<a href='./download/dna/Ashbya_gossypii.zip' download='Ashbya_gossypii.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1057,212001,"<a href='./download/domain/Ashbya_gossypii_domain.zip' download='Ashbya_gossypii_domain.zip'>Download domain sequences</a>");
+
+                                dtreeFungi.add(212002,212,'Komagataella pastoris');
+                                dtreeFungi.add(1057,212002,"<a href='./download/protein/Komagataella_pastoris.zip' download='Komagataella_pastoris.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1058,212002,"<a href='./download/dna/Komagataella_pastoris.zip' download='Komagataella_pastoris.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1059,212002,"<a href='./download/domain/Komagataella_pastoris_domain.zip' download='Komagataella_pastoris_domain.zip'>Download domain sequences</a>");
+
+                                dtreeFungi.add(212003,212,'Saccharomyces cerevisiae');
+                                dtreeFungi.add(10577,212003,"<a href='./download/protein/Saccharomyces_cerevisiae.zip' download='Saccharomyces_cerevisiae.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(10587,212003,"<a href='./download/dna/Saccharomyces_cerevisiae.zip' download='Saccharomyces_cerevisiae.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(10597,212003,"<a href='./download/domain/Saccharomyces_cerevisiae_domain.zip' download='Saccharomyces_cerevisiae_domain.zip'>Download domain sequences</a>");
+
+                                dtreeFungi.add(212004,212,'Yarrowia lipolytica');
+                                dtreeFungi.add(1061,212004,"<a href='./download/protein/Yarrowia_lipolytica.zip' download='Yarrowia_lipolytica.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1062,212004,"<a href='./download/dna/Yarrowia_lipolytica.zip' download='Yarrowia_lipolytica.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1063,212004,"<a href='./download/domain/Yarrowia_lipolytica_domain.zip' download='Yarrowia_lipolytica_domain.zip'>Download domain sequences</a>");
+
+
+                                //Schizosaccharomycetales
+                                dtreeFungi.add(213,2,'Schizosaccharomycetales');
+                                dtreeFungi.add(213002,213,'Schizosaccharomyces japonicus');
+                                dtreeFungi.add(1069,213002,"<a href='./download/protein/Schizosaccharomyces_japonicus.zip' download='Schizosaccharomyces_japonicus.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1070,213002,"<a href='./download/dna/Schizosaccharomyces_japonicus.zip' download='Schizosaccharomyces_japonicus.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1071,213002,"<a href='./download/domain/Schizosaccharomyces_japonicus_domain.zip' download='Schizosaccharomyces_japonicus_domain.zip'>Download domain sequences</a>");
+
+                                dtreeFungi.add(213004,213,'Schizosaccharomyces pombe');
+                                dtreeFungi.add(1071,213004,"<a href='./download/protein/Schizosaccharomyces_pombe.zip' download='Schizosaccharomyces_pombe.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1072,213004,"<a href='./download/dna/Schizosaccharomyces_pombe.zip' download='Schizosaccharomyces_pombe.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1073,213004,"<a href='./download/domain/Schizosaccharomyces_pombe_domain.zip' download='Schizosaccharomyces_pombe_domain.zip'>Download domain sequences</a>");
+
+                                dtreeFungi.add(25502,213,'Schizosaccharomyces octosporus');
+                                dtreeFungi.add(1071,25502,"<a href='./download/protein/Schizosaccharomyces_octosporus.zip' download='Schizosaccharomyces_octosporus.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1072,25502,"<a href='./download/dna/Schizosaccharomyces_octosporus.zip' download='Schizosaccharomyces_octosporus.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1073,25502,"<a href='./download/domain/Schizosaccharomyces_octosporus_domain.zip' download='Schizosaccharomyces_octosporus_domain.zip'>Download domain sequences</a>");
+
+                                dtreeFungi.add(25603,213,'Schizosaccharomyces cryophilus');
+                                dtreeFungi.add(1071,25603,"<a href='./download/protein/Schizosaccharomyces_cryophilus.zip' download='Schizosaccharomyces_cryophilus.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1072,25603,"<a href='./download/dna/Schizosaccharomyces_cryophilus.zip' download='Schizosaccharomyces_cryophilus.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1073,25603,"<a href='./download/domain/Schizosaccharomyces_cryophilus_domain.zip' download='Schizosaccharomyces_cryophilus_domain.zip'>Download domain sequences</a>");
+
+
+                                //Ustilaginales
+                                dtreeFungi.add(214,2,'Ustilaginales');
+                                dtreeFungi.add(214001,214,'Sporisorium reilianum');
+                                dtreeFungi.add(1073,214001,"<a href='./download/protein/Sporisorium_reilianum.zip' download='Sporisorium_reilianum.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1074,214001,"<a href='./download/dna/Sporisorium_reilianum.zip' download='Sporisorium_reilianum.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1075,214001,"<a href='./download/domain/Sporisorium_reilianum_domain.zip' download='Sporisorium_reilianum_domain.zip'>Download domain sequences</a>");
+
+                                dtreeFungi.add(214002,214,'Ustilago maydis');
+                                dtreeFungi.add(1075,214002,"<a href='./download/protein/Ustilago_maydis.zip' download='Ustilago_maydis.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1076,214002,"<a href='./download/dna/Ustilago_maydis.zip' download='Ustilago_maydis.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1077,214002,"<a href='./download/domain/Ustilago_maydis_domain.zip' download='Ustilago_maydis_domain.zip'>Download domain sequences</a>");
+
+                                //Leotiomycetes
+                                dtreeFungi.add(215,2,'Sclerotiniaceae');
+                                dtreeFungi.add(215002,215,'Sclerotinia sclerotiorum');
+                                dtreeFungi.add(1077,215002,"<a href='./download/protein/Sclerotinia_sclerotiorum.zip' download='Sclerotinia_sclerotiorum.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1078,215002,"<a href='./download/dna/Sclerotinia_sclerotiorum.zip' download='Sclerotinia_sclerotiorum.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1079,215002,"<a href='./download/domain/Sclerotinia_sclerotiorum_domain.zip' download='Sclerotinia_sclerotiorum_domain.zip'>Download domain sequences</a>");
+
+                                dtreeFungi.add(215003,215,'Blumeria graminis');
+                                dtreeFungi.add(1078,215003,"<a href='./download/protein/Blumeria_graminis.zip' download='Blumeria_graminis.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1079,215003,"<a href='./download/dna/Blumeria_graminis.zip' download='Blumeria_graminis.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1080,215003,"<a href='./download/domain/Blumeria_graminis_domain.zip' download='Blumeria_graminis_domain.zip'>Download domain sequences</a>");
+
+
+
+                                //Tremellales
+                                dtreeFungi.add(216,2,'Tremellales');
+                                dtreeFungi.add(216001,216,'Cryptococcus neoformans');
+                                dtreeFungi.add(1079,216001,"<a href='./download/protein/Cryptococcus_neoformans.zip' download='Cryptococcus_neoformans.zip'>Download protein sequences</a>");
+                                dtreeFungi.add(1080,216001,"<a href='./download/dna/Cryptococcus_neoformans.zip' download='Cryptococcus_neoformans.zip'>Download dna sequences</a>");
+                                //dtreeFungi.add(1081,216001,"<a href='./download/domain/Cryptococcus_neoformans_domain.zip' download='Cryptococcus_neoformans_domain.zip'>Download domain sequences</a>");
+
+
+
+
+                                document.write(dtreeFungi);
+
+
+                            </script><!--替换-->
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <br />
+            <!--anotationtable-->
+            <br/><br/>
+            <div align="justify"><font face="Arial, Helvetica, sans-serif"><strong><a name="annotations"></a><font color="#333333" size="4">&nbsp;&lt;2&gt; Download annotations</font></strong>:</font></div>
+            <br/>
+            <hr align="left" width="99%" size="1" color="#209bb7">
+
+            <table width='1000' border='1' align='center' style='border-collapse:collapse;border-spacing:0px;border:1px solid grey;'><tr style='background-color: rgba(150, 234, 238, 0.3);' width='60' height='30' scope='col'><td style='font-size: 16px' align='center' colspan='5'>Intrinsically Disordered Region</td></tr><tr><td width='144' height='30'align='center' onMouseOver="showDiv('D<sup>2</sup>P<sup>2</sup>')">&nbsp;&nbsp;<a href=./download/disorder/D2P2.zip
+>D<sup>2</sup>P<sup>2</sup></a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('IUPred2A')">&nbsp;&nbsp;<a href=./download/disorder/IUPred2A.zip
+>IUPred2A</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('MobiDB 3.0')">&nbsp;&nbsp;<a href=./download/disorder/MobiDB.zip
+>MobiDB 3.0</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('DisProt')">&nbsp;&nbsp;<a href=./download/disorder/DisProt.zip
+>DisProt</a>&nbsp;</td><td> </td></tr><tr style='background-color: rgba(150, 234, 238, 0.3);' width='60' height='30' scope='col'><td style='font-size: 16px' align='center' colspan='5'>Domain Annotation</td></tr><tr><td width='144' height='30'align='center' onMouseOver="showDiv('PLAAC')">&nbsp;&nbsp;<a href=./download/domain/PLAAC.zip
+>PLAAC</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('AmyPro')">&nbsp;&nbsp;<a href=./download/domain/AmyPro.zip
+>AmyPro</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('SMART')">&nbsp;&nbsp;<a href=./download/domain/SMART.zip
+>SMART</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('Pfam')">&nbsp;&nbsp;<a href=./download/domain/Pfam.zip
+>Pfam</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('InterPro')">&nbsp;&nbsp;<a href=./download/domain/InterPro.zip
+>InterPro</a>&nbsp;</td></tr><tr><td width='144' height='30'align='center' onMouseOver="showDiv('LCR-eXXXplorer')">&nbsp;&nbsp;<a href=./download/domain/LCR-eXXXplorer.zip
+>LCR-eXXXplorer</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('CDD')">&nbsp;&nbsp;<a href=./download/domain/CDD.zip
+>CDD</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('PRINTS')">&nbsp;&nbsp;<a href=./download/domain/PRINTS.zip
+>PRINTS</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('PROSITE')">&nbsp;&nbsp;<a href=./download/domain/PROSITE.zip
+>PROSITE</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('Gene3D')">&nbsp;&nbsp;<a href=./download/domain/Gene3D.zip
+>Gene3D</a>&nbsp;</td></tr><tr></tr><tr style='background-color: rgba(150, 234, 238, 0.3);' width='60' height='30' scope='col'><td style='font-size: 16px'align='center' colspan='5'>Post-translational Modification</td></tr><tr><td width='144' height='30'align='center' onMouseOver="showDiv('EPSD')">&nbsp;&nbsp;<a href=./download/ptm/EPSD.zip
+>EPSD</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('PLMD')">&nbsp;&nbsp;<a href=./download/ptm/PLMD.zip
+>PLMD</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('PhosphoSitePlus')">&nbsp;&nbsp;<a href=./download/ptm/PhosphoSitePlus.zip
+>PhosphoSitePlus</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('dbPTM')">&nbsp;&nbsp;<a href=./download/ptm/dbPTM.zip
+>dbPTM</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('HPRD')">&nbsp;&nbsp;<a href=./download/ptm/HPRD.zip
+>HPRD</a>&nbsp;</td></tr><tr><td width='144' height='30'align='center' onMouseOver="showDiv('BioGRID')">&nbsp;&nbsp;<a href=./download/ptm/BioGRID.zip
+>BioGRID</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('PhosphoBase')">&nbsp;&nbsp;<a href=./download/ptm/PhosphoBase.zip
+>PhosphoBase</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('mUbiSiDa')">&nbsp;&nbsp;<a href=./download/ptm/mUbiSiDa.zip
+>mUbiSiDa</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('PTMcode')">&nbsp;&nbsp;<a href=./download/ptm/PTMcode.zip
+>PTMcode</a>&nbsp;</td><td> </td></tr><tr style='background-color: rgba(150, 234, 238, 0.3);' width='60' height='30' scope='col'><td style='font-size: 16px' align='center' colspan='5'>Genetic Variation</td></tr><tr><td width='144' height='30'align='center' onMouseOver="showDiv('dbSNP')">&nbsp;&nbsp;<a href=./download/genetic_variation/dbSNP.zip
+>dbSNP</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('VarCards')">&nbsp;&nbsp;<a href=./download/genetic_variation/VarCards.zip
+>VarCards</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('rSNPBase')">&nbsp;&nbsp;<a href=./download/genetic_variation/rSNPBase.zip
+>rSNPBase</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('Kin-Driver')">&nbsp;&nbsp;<a href=./download/genetic_variation/Kin-Driver.zip
+>Kin-Driver</a>&nbsp;</td><td> </td></tr><tr style='background-color: rgba(150, 234, 238, 0.3);' width='60' height='30' scope='col'><td style='font-size: 16px' align='center' colspan='5'>Cancer Mutation</td></tr><tr><td width='144' height='30'align='center' onMouseOver="showDiv('TCGA')">&nbsp;&nbsp;<a href=./download/mutation/TCGA.zip
+>TCGA</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('ICGC')">&nbsp;&nbsp;<a href=./download/mutation/ICGC.zip
+>ICGC</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('COSMIC')">&nbsp;&nbsp;<a href=./download/mutation/COSMIC.zip
+>COSMIC</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('CGAP')">&nbsp;&nbsp;<a href=./download/mutation/CGAP.zip
+>CGAP</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('IntOGen')">&nbsp;&nbsp;<a href=./download/mutation/IntOGen.zip
+>IntOGen</a>&nbsp;</td></tr><tr><td width='144' height='30'align='center' onMouseOver="showDiv('BioMuta')">&nbsp;&nbsp;<a href=./download/mutation/BioMuta.zip
+>BioMuta</a>&nbsp;</td><td> </td><td> </td><td> </td><td> </td></tr><tr style='background-color: rgba(150, 234, 238, 0.3);' width='60' height='30' scope='col'><td style='font-size: 16px'align='center' colspan='5'>Molecular Interaction</td></tr><tr><td width='144' height='30'align='center' onMouseOver="showDiv('HINT')">&nbsp;&nbsp;<a href=./download/ppi/HINT.zip
+>HINT</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('InWeb_IM')">&nbsp;&nbsp;<a href=./download/ppi/InWeb_IM.zip
+>InWeb_IM</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('RISE')">&nbsp;&nbsp;<a href=./download/ppi/RISE.zip
+>RISE</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('TRRUST')">&nbsp;&nbsp;<a href=./download/ppi/TRRUST.zip
+>TRRUST</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('TIMBAL')">&nbsp;&nbsp;<a href=./download/ppi/TIMBAL.zip
+>TIMBAL</a>&nbsp;</td></tr><tr><td width='144' height='30'align='center' onMouseOver="showDiv('BindingDB')">&nbsp;&nbsp;<a href=./download/ppi/BindingDB.zip
+>BindingDB</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('PLIC')">&nbsp;&nbsp;<a href=./download/ppi/PLIC.zip
+>PLIC</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('RAIN')">&nbsp;&nbsp;<a href=./download/ppi/RAIN.zip
+>RAIN</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('Mentha')">&nbsp;&nbsp;<a href=./download/ppi/Mentha.zip
+>Mentha</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('YTRP')">&nbsp;&nbsp;<a href=./download/ppi/YTRP.zip
+>YTRP</a>&nbsp;</td></tr><tr><td width='144' height='30'align='center' onMouseOver="showDiv('RegNetwork')">&nbsp;&nbsp;<a href=./download/ppi/RegNetwork.zip
+>RegNetwork</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('PINA')">&nbsp;&nbsp;<a href=./download/ppi/PINA.zip
+>PINA</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('IID')">&nbsp;&nbsp;<a href=./download/ppi/IID.zip
+>IID</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('iRefIndex')">&nbsp;&nbsp;<a href=./download/ppi/iRefIndex.zip
+>iRefIndex</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('MIST')">&nbsp;&nbsp;<a href=./download/ppi/MIST.zip
+>MIST</a>&nbsp;</td></tr><tr><td width='144' height='30'align='center' onMouseOver="showDiv('DifferentialNET')">&nbsp;&nbsp;<a href=./download/ppi/DifferentialNET.zip
+>DifferentialNET</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('RNAct')">&nbsp;&nbsp;<a href=./download/ppi/RNAct.zip
+>RNAct</a>&nbsp;</td><td> </td><td> </td><td> </td></tr><tr style='background-color: rgba(150, 234, 238, 0.3);' width='60' height='30' scope='col'><td style='font-size: 16px' align='center' colspan='5'>Disease-associated Information</td></tr><tr><td width='144' height='30'align='center' onMouseOver="showDiv('ClinVar')">&nbsp;&nbsp;<a href=./download/disease_assotiate/CinVar.zip
+>ClinVar</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('PTMD')">&nbsp;&nbsp;<a href=./download/disease_assotiate/PTMD.zip
+>PTMD</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('MSDD')">&nbsp;&nbsp;<a href=./download/disease_assotiate/MSDD.zip
+>MSDD</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('BRONCO')">&nbsp;&nbsp;<a href=./download/disease_assotiate/BRONCO.zip
+>BRONCO</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('HGVTB')">&nbsp;&nbsp;<a href=./download/disease_assotiate/HGVTB.zip
+>HGVTB</a>&nbsp;</td></tr><tr><td width='144' height='30'align='center' onMouseOver="showDiv('PancanQTL')">&nbsp;&nbsp;<a href=./download/disease_assotiate/PancanQTL.zip
+>PancanQTL</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('TumorFusions')">&nbsp;&nbsp;<a href=./download/disease_assotiate/TumorFusions.zip
+>TumorFusions</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('LncRNADisease')">&nbsp;&nbsp;<a href=./download/disease_assotiate/LncRNADisease.zip
+>LncRNADisease</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('OMIM')">&nbsp;&nbsp;<a href=./download/disease_assotiate/OMIM.zip
+>OMIM</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('DisGeNET')">&nbsp;&nbsp;<a href=./download/disease_assotiate/DisGeNET.zip
+>DisGeNET</a>&nbsp;</td></tr><tr><td width='144' height='30'align='center' onMouseOver="showDiv('GWAS Central')">&nbsp;&nbsp;<a href=./download/disease_assotiate/GWAS Central.zip
+>GWAS Central</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('GWASdb')">&nbsp;&nbsp;<a href=./download/disease_assotiate/GWASdb.zip
+>GWASdb</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('DiseaseEnhancer')">&nbsp;&nbsp;<a href=./download/disease_assotiate/DiseaseEnhancer.zip
+>DiseaseEnhancer</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('ActiveDriverDB')">&nbsp;&nbsp;<a href=./download/disease_assotiate/ActiveDriverDB.zip
+>ActiveDriverDB</a>&nbsp;</td><td> </td></tr><tr style='background-color: rgba(150, 234, 238, 0.3);' width='60' height='30' scope='col'><td style='font-size: 16px'align='center' colspan='5'>Drug-target relation</td></tr><tr><td width='144' height='30'align='center' onMouseOver="showDiv('DrugBank')">&nbsp;&nbsp;<a href=./download/drug_target/DrugBank.zip
+>DrugBank</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('TTD')">&nbsp;&nbsp;<a href=./download/drug_target/TTD.zip
+>TTD</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('KPID')">&nbsp;&nbsp;<a href=./download/drug_target/KPID.zip
+>KPID</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('GRAC')">&nbsp;&nbsp;<a href=./download/drug_target/GRAC.zip
+>GRAC</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('ADReCS-Target')">&nbsp;&nbsp;<a href=./download/drug_target/ADReCS-Target.zip
+>ADReCS-Target</a>&nbsp;</td></tr><tr><td width='144' height='30'align='center' onMouseOver="showDiv('ECOdrug')">&nbsp;&nbsp;<a href=./download/drug_target/ECOdrug.zip
+>ECOdrug</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('DGIdb')">&nbsp;&nbsp;<a href=./download/drug_target/DGIdb.zip
+>DGIdb</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('CTD')">&nbsp;&nbsp;<a href=./download/drug_target/CTD.zip
+>CTD</a>&nbsp;</td><td> </td><td> </td></tr><tr style='background-color: rgba(150, 234, 238, 0.3);' width='60' height='30' scope='col'><td style='font-size: 16px'align='center' colspan='5'>Physicochemical Property</td></tr><tr><td width='144' height='30'align='center' onMouseOver="showDiv('Compute pI/Mw')">&nbsp;&nbsp;<a href=./download/physicochemical/Compute pI.zip
+>Compute pI/Mw</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('AAindex')">&nbsp;&nbsp;<a href=./download/physicochemical/AAindex.zip
+>AAindex</a>&nbsp;</td><td> </td><td> </td><td> </td></tr><tr style='background-color: rgba(150, 234, 238, 0.3);' width='60' height='30' scope='col'><td style='font-size: 16px'align='center' colspan='5'>Protein Functional Annotation</td></tr><tr><td width='144' height='30'align='center' onMouseOver="showDiv('THANATOS')">&nbsp;&nbsp;<a href=./download/function/THANATOS.zip
+>THANATOS</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('iEKPD')">&nbsp;&nbsp;<a href=./download/function/iEKPD.zip
+>iEKPD</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('CGDB')">&nbsp;&nbsp;<a href=./download/function/CGDB.zip
+>CGDB</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('ENPD')">&nbsp;&nbsp;<a href=./download/function/ENPD.zip
+>ENPD</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('PIRSF')">&nbsp;&nbsp;<a href=./download/function/PIRSF.zip
+>PIRSF</a>&nbsp;</td></tr><tr><td width='144' height='30'align='center' onMouseOver="showDiv('CORUM')">&nbsp;&nbsp;<a href=./download/function/CORUM.zip
+>CORUM</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('CellMarker')">&nbsp;&nbsp;<a href=./download/function/CellMarker.zip
+>CellMarker</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('RaftProt')">&nbsp;&nbsp;<a href=./download/function/RaftProt.zip
+>RaftProt</a>&nbsp;</td><td> </td><td> </td></tr><tr style='background-color: rgba(150, 234, 238, 0.3);' width='60' height='30' scope='col'><td style='font-size: 16px'align='center' colspan='5'>Protein Expression/Proteomics</td></tr><tr><td width='144' height='30'align='center' onMouseOver="showDiv('THPA')">&nbsp;&nbsp;<a href=./download/proteomics/THPA.zip
+>THPA</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('HPM')">&nbsp;&nbsp;<a href=./download/proteomics/HPM.zip
+>HPM</a>&nbsp;</td><td> </td><td> </td><td> </td></tr><tr style='background-color: rgba(150, 234, 238, 0.3);' width='60' height='30' scope='col'><td style='font-size: 16px'align='center' colspan='5'>Protein 3D Structure</td></tr><tr><td width='144' height='30'align='center' onMouseOver="showDiv('PDB')">&nbsp;&nbsp;<a href=./download/structure/PDB.zip
+>PDB</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('MMDB')">&nbsp;&nbsp;<a href=./download/structure/MMDB.zip
+>MMDB</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('SCOP')">&nbsp;&nbsp;<a href=./download/structure/SCOP.zip
+>SCOP</a>&nbsp;</td><td> </td><td> </td></tr><tr style='background-color: rgba(150, 234, 238, 0.3);' width='60' height='30' scope='col'><td style='font-size: 16px'align='center' colspan='5'>Subcellular Localization</td></tr><tr><td width='144' height='30'align='center' onMouseOver="showDiv('COMPARTMENTS')">&nbsp;&nbsp;<a href=./download/localization/COMPARTMENTS.zip
+>COMPARTMENTS</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('NLSdb')">&nbsp;&nbsp;<a href=./download/localization/NLSdb.zip
+>NLSdb</a>&nbsp;</td><td> </td><td> </td><td> </td></tr><tr style='background-color: rgba(150, 234, 238, 0.3);' width='60' height='30' scope='col'><td style='font-size: 16px'align='center' colspan='5'>mRNA Expression</td></tr><tr><td width='144' height='30'align='center' onMouseOver="showDiv('TCGA')">&nbsp;&nbsp;<a href=./download/expression/TCGA.zip
+>TCGA</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('ICGC')">&nbsp;&nbsp;<a href=./download/expression/ICGC.zip
+>ICGC</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('COSMIC')">&nbsp;&nbsp;<a href=./download/expression/COSMIC.zip
+>COSMIC</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('GEO')">&nbsp;&nbsp;<a href=./download/expression/GEO.zip
+>GEO</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('ArrayExpress')">&nbsp;&nbsp;<a href=./download/expression/ArrayExpress.zip
+>ArrayExpress</a>&nbsp;</td></tr><tr><td width='144' height='30'align='center' onMouseOver="showDiv('GXD')">&nbsp;&nbsp;<a href=./download/expression/GXD.zip
+>GXD</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('TissGDB')">&nbsp;&nbsp;<a href=./download/expression/TissGDB.zip
+>TissGDB</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('TISSUES')">&nbsp;&nbsp;<a href=./download/expression/TISSUES.zip
+>TISSUES</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('BioXpress')">&nbsp;&nbsp;<a href=./download/expression/BioXpress.zip
+>BioXpress</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('HPM')">&nbsp;&nbsp;<a href=./download/expression/HPM.zip
+>HPM</a>&nbsp;</td></tr><tr><td width='144' height='30'align='center' onMouseOver="showDiv('THPA')">&nbsp;&nbsp;<a href=./download/expression/THPA.zip
+>THPA</a>&nbsp;</td><td> </td><td> </td><td> </td><td> </td></tr><tr style='background-color: rgba(150, 234, 238, 0.3);' width='60' height='30' scope='col'><td style='font-size: 16px'align='center' colspan='5'>DNA & RNA Element</td></tr><tr><td width='144' height='30'align='center' onMouseOver="showDiv('UTRdb')">&nbsp;&nbsp;<a href=./download/element/UTRdb.zip
+>UTRdb</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('circBase')">&nbsp;&nbsp;<a href=./download/element/circBase.zip
+>circBase</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('circRNADb')">&nbsp;&nbsp;<a href=./download/element/circRNADb.zip
+>circRNADb</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('CircNet')">&nbsp;&nbsp;<a href=./download/element/CircNet.zip
+>CircNet</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('miRTarBase')">&nbsp;&nbsp;<a href=./download/element/miRTarBase.zip
+>miRTarBase</a>&nbsp;</td></tr><tr><td width='144' height='30'align='center' onMouseOver="showDiv('miRWalk')">&nbsp;&nbsp;<a href=./download/element/miRWalk.zip
+>miRWalk</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('TargetScan')">&nbsp;&nbsp;<a href=./download/element/TargetScan.zip
+>TargetScan</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('miRecords')">&nbsp;&nbsp;<a href=./download/element/miRecords.zip
+>miRecords</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('SomamiR')">&nbsp;&nbsp;<a href=./download/element/SomamiR.zip
+>SomamiR</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('miRcode')">&nbsp;&nbsp;<a href=./download/element/miRcode.zip
+>miRcode</a>&nbsp;</td></tr><tr><td width='144' height='30'align='center' onMouseOver="showDiv('RAID')">&nbsp;&nbsp;<a href=./download/element/RAID.zip
+>RAID</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('OverGeneDB')">&nbsp;&nbsp;<a href=./download/element/OverGeneDB.zip
+>OverGeneDB</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('SEA')">&nbsp;&nbsp;<a href=./download/element/SEA.zip
+>SEA</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('microRNA_org')">&nbsp;&nbsp;<a href=./download/element/microRNA_org.zip
+>microRNA_org</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('m6AVar')">&nbsp;&nbsp;<a href=./download/element/m6AVar.zip
+>m6AVar</a>&nbsp;</td></tr><tr></tr><tr style='background-color: rgba(150, 234, 238, 0.3);' width='60' height='30' scope='col'><td style='font-size: 16px'align='center' colspan='5'>DNA Methylation</td></tr><tr><td width='144' height='30'align='center' onMouseOver="showDiv('TCGA')">&nbsp;&nbsp;<a href=./download/methylation/TCGA.zip
+>TCGA</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('ICGC')">&nbsp;&nbsp;<a href=./download/methylation/ICGC.zip
+>ICGC</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('COSMIC')">&nbsp;&nbsp;<a href=./download/methylation/COSMIC.zip
+>COSMIC</a>&nbsp;</td><td width='144' height='30'align='center' onMouseOver="showDiv('MethyCancer')">&nbsp;&nbsp;<a href=./download/methylation/MethyCancer.zip
+>MethyCancer</a>&nbsp;</td><td> </td></tr></table>            <br/><br/>
+            <!--xinjiadeAUC-->
+
+        </div>
+    </div>
+
+            <div id="footer" style="width:99%">
+                <div id="siteInfo" > Copyright © 2004-2019. The CUCKOO Workgroup. All Rights Reserved </div>
+            </div>
+

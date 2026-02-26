@@ -1,0 +1,6 @@
+source_db	url	raw_file	status	status_code	message	db_version	download_date	bytes	ssl_mode
+llpsdb	http://bio-comp.org.cn/llpsdb/help.html	data/raw/llpsdb/help.html	failed	0	url_error: timed out	unknown	2026-02-25	0	verified
+phasepro	https://phasepro.elte.hu/help	data/raw/phasepro/help.html	ok	200	downloaded_with_insecure_ssl_fallback	unknown	2026-02-25	24203	insecure_fallback
+drllps	https://llps.biocuckoo.cn/download.php	data/raw/drllps/download.html	ok	200	downloaded_with_insecure_ssl_fallback	unknown	2026-02-25	167524	insecure_fallback
+disprot	https://disprot.org/download	data/raw/disprot/download.html	ok	200	downloaded_with_insecure_ssl_fallback	unknown	2026-02-25	11425	insecure_fallback
+mobidb	https://mobidb.org/	data/raw/mobidb/home.html	ok	200	downloaded_with_insecure_ssl_fallback	unknown	2026-02-25	10007	insecure_fallback

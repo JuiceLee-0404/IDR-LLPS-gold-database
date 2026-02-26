@@ -1,0 +1,64 @@
+{
+  "sources": [
+    {
+      "source_db": "llpsdb",
+      "url": "http://bio-comp.org.cn/llpsdb/help.html",
+      "raw_file": "data/raw/llpsdb/help.html",
+      "status": "failed",
+      "status_code": "0",
+      "message": "url_error: timed out",
+      "db_version": "unknown",
+      "download_date": "2026-02-25",
+      "bytes": "0",
+      "ssl_mode": "verified"
+    },
+    {
+      "source_db": "phasepro",
+      "url": "https://phasepro.elte.hu/help",
+      "raw_file": "data/raw/phasepro/help.html",
+      "status": "ok",
+      "status_code": "200",
+      "message": "downloaded_with_insecure_ssl_fallback",
+      "db_version": "unknown",
+      "download_date": "2026-02-25",
+      "bytes": "24203",
+      "ssl_mode": "insecure_fallback"
+    },
+    {
+      "source_db": "drllps",
+      "url": "https://llps.biocuckoo.cn/download.php",
+      "raw_file": "data/raw/drllps/download.html",
+      "status": "ok",
+      "status_code": "200",
+      "message": "downloaded_with_insecure_ssl_fallback",
+      "db_version": "unknown",
+      "download_date": "2026-02-25",
+      "bytes": "167524",
+      "ssl_mode": "insecure_fallback"
+    },
+    {
+      "source_db": "disprot",
+      "url": "https://disprot.org/download",
+      "raw_file": "data/raw/disprot/download.html",
+      "status": "ok",
+      "status_code": "200",
+      "message": "downloaded_with_insecure_ssl_fallback",
+      "db_version": "unknown",
+      "download_date": "2026-02-25",
+      "bytes": "11425",
+      "ssl_mode": "insecure_fallback"
+    },
+    {
+      "source_db": "mobidb",
+      "url": "https://mobidb.org/",
+      "raw_file": "data/raw/mobidb/home.html",
+      "status": "ok",
+      "status_code": "200",
+      "message": "downloaded_with_insecure_ssl_fallback",
+      "db_version": "unknown",
+      "download_date": "2026-02-25",
+      "bytes": "10007",
+      "ssl_mode": "insecure_fallback"
+    }
+  ]
+}

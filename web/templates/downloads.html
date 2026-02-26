@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Downloads · IDR-LLPS{% endblock %}
+
+{% block content %}
+  <h2 class="mb-3">Downloads</h2>
+
+  <h4>Core data</h4>
+  <ul>
+    <li><a href="/static/../data/processed/idr_llps.sqlite">idr_llps.sqlite</a> (SQLite database)</li>
+    <li><a href="/static/../data/processed/samples.tsv">samples.tsv</a> (samples table)</li>
+  </ul>
+
+  <h4>Balanced dataset (absolute pos/neg)</h4>
+  <ul>
+    <li><a href="/ml_results/balanced_nardini90_full.tsv">balanced_nardini90_full.tsv</a></li>
+    <li><a href="/ml_results/balanced_nardini90_train.tsv">balanced_nardini90_train.tsv</a></li>
+    <li><a href="/ml_results/balanced_nardini90_test.tsv">balanced_nardini90_test.tsv</a></li>
+  </ul>
+
+  <h4>ML metrics &amp; predictions</h4>
+  <ul>
+    <li><a href="/ml_results/ml_baselines_metrics.json">ml_baselines_metrics.json</a></li>
+    <li><a href="/ml_results/ml_baselines_preds.tsv">ml_baselines_preds.tsv</a></li>
+    <li><a href="/ml_results/deep_baseline_metrics.json">deep_baseline_metrics.json</a></li>
+    <li><a href="/ml_results/deep_baseline_preds.tsv">deep_baseline_preds.tsv</a></li>
+  </ul>
+
+  <h4>Feature scores (NARDINI90)</h4>
+  <ul>
+    <li><a href="/reports/feature_weights_nardini90.tsv">feature_weights_nardini90.tsv</a> (LogisticRegression weights)</li>
+    <li><a href="/reports/feature_scores_nardini90.md">feature_scores_nardini90.md</a></li>
+    <li><a href="/reports/feature_importances_nardini90_rf.tsv">feature_importances_nardini90_rf.tsv</a> (RandomForest importances)</li>
+    <li><a href="/reports/feature_importances_nardini90_rf.md">feature_importances_nardini90_rf.md</a></li>
+  </ul>
+{% endblock %}
+

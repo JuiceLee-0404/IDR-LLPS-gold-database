@@ -1,0 +1,10 @@
+body {
+  background-color: #f8f9fa;
+}
+
+table.table-sm th,
+table.table-sm td {
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+}
+

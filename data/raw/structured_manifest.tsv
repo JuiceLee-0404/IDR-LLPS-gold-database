@@ -1,0 +1,5 @@
+source_db	url	file_path	status	rows	message	download_date
+drllps	https://llps.biocuckoo.cn/download/LLPS.txt	data/raw/drllps/LLPS.txt	ok	9281	downloaded	2026-02-26
+disprot	https://disprot.org/api/search?release=2025_06&show_ambiguous=true&show_obsolete=false&format=tsv&namespace=all&get_consensus=false	data/raw/disprot/disprot_regions.tsv	ok	13347	downloaded	2026-02-26
+phasepro	https://phasepro.elte.hu/download_full.json	data/raw/phasepro/download_full.json	ok	121	downloaded	2026-02-26
+llpsdatasets	https://llpsdatasets.ppmclab.com/downloads/datasets.tsv	data/raw/llpsdatasets/datasets.tsv	ok	2876	downloaded	2026-02-26

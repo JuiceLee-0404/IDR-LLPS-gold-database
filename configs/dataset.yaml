@@ -1,0 +1,142 @@
+project:
+  name: idr_llps_dataset
+  version: "0.1.0"
+  species_scope: all
+  created_by: cursor_agent
+
+paths:
+  raw_dir: data/raw
+  interim_dir: data/interim
+  processed_dir: data/processed
+  evidence_file: data/processed/evidence.tsv
+  idr_regions_file: data/processed/idr_regions.tsv
+  positives_file: data/interim/positives_idr_driven.tsv
+  negatives_file: data/interim/negatives.tsv
+  samples_file: data/processed/samples.tsv
+  splits_file: data/processed/splits.tsv
+  conflicts_file: data/interim/evidence_conflict.tsv
+  run_metadata_file: data/processed/run_metadata.json
+
+sample_primary_key:
+  - protein_accession
+  - isoform
+  - region_start
+  - region_end
+  - construct_context
+
+evidence_grading:
+  A:
+    description: "Direct experimental IDR-driver evidence."
+    examples:
+      - "Isolated IDR phase separates"
+      - "IDR deletion abolishes LLPS"
+  B:
+    description: "Strong indirect support with region-level overlap."
+    examples:
+      - "Driver region overlaps IDR >= threshold"
+      - "Mutation in IDR reduces LLPS"
+  C:
+    description: "Weak or coarse-grained support, not used for strict set."
+    examples:
+      - "Protein-level LLPS without region-level evidence"
+
+idr_rules:
+  idr_overlap_threshold: 0.7
+  min_idr_length: 15
+  accepted_idr_sources:
+    - disprot
+    - mobidb
+  include_predicted_idr_for_hybrid: true
+
+positive_rules:
+  include_evidence_grades:
+    - A
+    - B
+  require_idr_presence: true
+  exclude_structured_domain_only: true
+
+negative_rules:
+  include_experimental_negative: true
+  include_pseudo_negative: true
+  experimental_negative_source_whitelist:
+    - llpsdb
+    - phasepro
+    - drllps
+    - llpsdatasets
+  pseudo_negative_filters:
+    remove_known_llps_proteins: true
+    remove_close_homologs: true
+    remove_high_risk_functions: true
+  high_risk_keyword_blocklist:
+    - prion-like
+    - granule
+    - condensate
+    - phase separation
+    - membraneless organelle
+
+homology_control:
+  identity_threshold: 0.3
+  method: kmer_jaccard
+  kmer_size: 3
+  split_strategy: group_by_cluster
+
+split:
+  train: 0.7
+  val: 0.15
+  test: 0.15
+  random_seed: 42
+  stratify_by:
+    - label
+    - idr_length_bin
+    - taxon_group
+
+output_fields:
+  evidence:
+    - evidence_id
+    - source_db
+    - source_entry_id
+    - protein_accession
+    - isoform
+    - gene_name
+    - organism
+    - taxon_id
+    - sequence
+    - construct_context
+    - region_start
+    - region_end
+    - idr_start
+    - idr_end
+    - idr_source
+    - llps_observed
+    - idr_driver_supported
+    - evidence_grade
+    - condition_text
+    - pmid
+    - db_version
+    - download_date
+  samples:
+    - sample_id
+    - protein_accession
+    - isoform
+    - gene_name
+    - organism
+    - taxon_id
+    - region_start
+    - region_end
+    - region_sequence
+    - idr_start
+    - idr_end
+    - idr_source
+    - label
+    - label_source
+    - evidence_grade_max
+    - evidence_count
+    - source_dbs
+    - pmids
+    - construct_context
+    - idr_length_bin
+    - taxon_group
+  splits:
+    - sample_id
+    - split
+    - dataset_version

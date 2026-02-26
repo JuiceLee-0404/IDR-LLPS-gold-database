@@ -1,0 +1,449 @@
+
+
+
+<script src="/static/js/my.js"></script>
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="/static/pics/favicon.ico"/>
+
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+          integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+    <script src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.ihavecookies.min.js"></script>
+
+    <script type="text/javascript" src="/static/js/ua-parser.min.js"></script>
+
+    <title>PhaSePro</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/bootstrap-4.3.1-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/gdpr.css" rel="stylesheet">
+
+
+    <style>
+        body {
+            padding-top: 30px;
+        }
+
+        .navbar-nav, .nav > li > a {
+            font-weight: bold;
+        }
+
+        .navbar-nav > li {
+            margin-left: 30px;
+            margin-right: 30px;
+        }
+
+        @media (min-width: 1600px) {
+            .abs-center-x {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+<nav class="navbar fixed-top navbar-expand-xl navbar-light bg-light ">
+    <a class="navbar-brand" href="/">
+        <img src="/static/pics/phaseseparation_art.png" height="45" alt="">&nbsp PhaSePro
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav abs-center-x">
+            <li class="nav-item" id="index">
+                <a class="nav-link" href="/"><i class="fas fa-home"><span
+                        style="margin-left: 4px">Home</span></i></a>
+            </li>
+            <li class="nav-item" id="browser">
+                <a class="nav-link" href="/browser"><i class="fas fa-globe"><span style="margin-left: 4px">Browse/Search</span></i></a>
+            </li>
+            <li class="nav-item" id="help">
+                <a class="nav-link" href="/help"><i class="fas fa-book"><span
+                        style="margin-left: 4px">About/Help</span></i></a>
+            </li>
+            <li class="nav-item" id="candidates_header">
+                <a class="nav-link" href="/candidates"><i class="fas fa-question"><span
+                        style="margin-left: 4px">Candidates</span></i></a>
+            </li>
+            <li class="nav-item" id="statistics">
+                <a class="nav-link" href="/statistics"><i class="fas fa-chart-bar"><span
+                        style="margin-left: 4px">Statistics</span></i></a>
+            </li>
+            <li class="nav-item" id="download">
+                <a class="nav-link" href="/download"><i class="fas fa-download"><span
+                        style="margin-left: 4px">Download</span></i></a>
+            </li>
+            <li class="nav-item" id="annotate">
+                <a class="nav-link" href="/annotate"><i class="fas fa-pen-fancy"><span
+                        style="margin-left: 4px">Annotate</span></i></a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+<script>
+    $(document).ready(function () {
+        $('#help').addClass('active');
+    });
+    let options = {
+        title: '',
+        message: 'By using PhaSePro you accept the Privacy Notice in compliance with Europe’s new General Data Protection Regulation (GDPR) that applies since 25 May 2018.',
+        link: '/privacy_notice',
+        delay: 500,
+        moreInfoLabel: 'Read the Privacy Notice',
+        advancedBtnLabel: '',
+        acceptBtnLabel:	'I accept the Privacy Notice',
+    };
+    $('body').ihavecookies(options);
+
+    
+    var parser = new UAParser();
+    console.log(parser.getResult());
+
+
+
+</script>
+
+
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="display-5 text-center">About/Help</h1>
+        <div class="row mt-5">
+            <div class="col my-auto pmid">
+                <h4>What is liquid-liquid phase separation (LLPS)?</h4>
+                <p class="text-justify">Liquid-liquid phase separation (LLPS) (also known as liquid demixing)
+                    processes underlie the formation of diverse membraneless organelles, such as stress granules,
+                    P-bodies, the nucleolus and postsynaptic densities, just to name a few (PMID:28935776). These newly
+                    discovered and very intensively researched biological condensates represent functional and
+                    structural units of cellular organization with an ever increasing number of cellular functions
+                    turning out to heavily rely on them, including transcriptional regulation and silencing
+                    (PMID:29930091 PMID:28636604) and the signal transduction networks of membrane receptors
+                    (PMID:22398450 PMID:27056844). Their formation through LLPS is typically driven by multivalent weak
+                    interactions of LLPS driver regions. LLPS has emerged as a general mechanism to organize the
+                    intracellular space, exploited not only by eukaryotic cells, but also by bacteria and viruses
+                    (PMID:30197298 PMID:28680096). Mutations affecting LLPS driver regions are implicated in diverse
+                    neurological disorders, such as Amyotrophic lateral sclerosis (ALS) and Frontotemporal dementia
+                    (FTD) (PMID:31188823), cancers, and muscular atrophies (PMID:28817800 PMID:26481498).<br>
+                    The ability to drive liquid-liquid phase separation (LLPS) is encoded in protein sequences, but it
+                    can be achieved by diverse architectures, including low sequence complexity disordered regions,
+                    multivalent domain – motif interactions, RNA binding domains, oligomerization domains and a
+                    combinations of these modules (PMID:30099026). Therefore, the identification of such proteins is
+                    difficult. In the last years liquid-liquid phase separation of proteins leading to the formation of
+                    membraneless organelles became an absolutely prominent topic in molecular-structural cell biology,
+                    resulting in an avalanche of high-impact publications. PhaSePro is the first comprehensive database
+                    serving as the central resource for proteins mediating LLPS.
+                </p>
+
+                <h4 class="mt-4">What information is contained in PhaSePro?</h4>
+
+                <p class="text-justify pmid">PhaSePro stores over one hundred proteins that are able to drive LLPS, all
+                    carefully curated and supported by literature references. For all of these proteins, PhaSePro
+                    provides:
+
+                <ul>
+                    <li>cross-reference to UniProt entries, including accessions, gene/protein names and source
+                        species
+                    </li>
+                    <li>the membraneless organelle(s) (MO) formed, as defined in the Gene Ontology</li>
+                    <li>if the protein is part of a multi-component LLPS system, the definition of other proteins needed
+                        for the
+                        MO formation
+                    </li>
+                    <li>the sequence boundaries and characteristics of the experimentally validated LLPS driver
+                        region(s)
+                    </li>
+                    <li>a description of the functional relevance of the given LLPS system and related MO, the
+                        functional class of the MO
+                    </li>
+                    <li>the types of molecular interactions involved in LLPS</li>
+                    <li>regulatory mechanisms of LLPS: post-translational modifications and alternative splicing events
+                        known to influence LLPS, all UniProt isoforms containing sequence changes in the annotated LLPS
+                        regions
+                    </li>
+                    <li>disease mutations confirmed to affect LLPS by experiments</li>
+                    <li>literature references from PubMed</li>
+                </ul>
+                In addition, PhaSePro provides a description of the experiment in which LLPS behavior was demonstrated,
+                using the Evidence and Conclusion Ontology (ECO), along with useful lists on the molecular partners and
+                other determinants that affect/regulate LLPS. Last but not least, PhaSePro applies the recently released
+                smart visualization tool of UniProt, ProtVista (PMID:28334231), extended with our annotated LLPS
+                regions, IUPred disorder predictions (PMID:29860432), PFAM annotations and PTMs from PhosphoSitePlus. An
+                overview of the PDB structures of the corresponding
+                LLPS protein regions, if available, is also provided on the entry pages.</p>
+
+                <h4 class="mt-4">Server functionality</h4>
+
+                <h5>Browsing/Searching</h5>
+                <ul>
+                    <li>Entries can be ordered and filtered based on name, organelle type and organism</li>
+                    <li>Entries can be filtered based on the molecular determinants of LLPS, such as RNA dependency and
+                        the
+                        involvement of domain-motif interactions
+                    </li>
+                    <li>A dedicated search field can be used to search for full or partial common/UniProt names, or
+                        UniProt
+                        accessions
+                    </li>
+                </ul>
+
+                <h5>Entry pages</h5>
+                <p class="text-justify">For each entry the dedicated entry page details information relevant to the
+                    protein’s involvement in LLPS, including:
+                </p>
+                <ul>
+                    <li>Basic data about the protein, including UniProt cross-reference, gene/protein names and source
+                        organism
+                    </li>
+                    <li>Basic data about the LLPS, including the region(s) of the protein shown to mediate LLPS
+                        including
+                        literature reference, and the type of membraneless organelle formed, linked to Gene Ontology
+                        terms
+                    </li>
+                    <li>A molecular feature viewer, showing the protein region involved in LLPS, disorder prediction via
+                        IUPred,
+                        available structures from the PDB, domain and site definitions, known PTMs and sequence variants
+                    <li>A structure viewer using LiteMol to depict structures from the PDB overlapping with the LLPS
+                        regions
+                    </li>
+                    <li>Detailed information about the LLPS process, including a description of the functional relevance
+                        of the
+                        membraneless organelle formed, its functional class, the biomolecules involved in the LLPS, and
+                        the molecular
+                        determinants and
+                        interaction types involved in LLPS
+                    </li>
+                    <li>Regulation of LLPS including post-translational modifications and isoforms, together with known
+                        germline
+                        mutations that affect the condensation
+                    </li>
+                    <li>A detailed description of the experimental procedures described in the supporting literature
+                        that serve
+                        as evidence for the involvement of the protein in LLPS, and that prove the liquid state of the
+                        condensates
+                    </li>
+                </ul>
+                <h5>Download</h5>
+                Data can be downloaded in multiple ways. The whole database can be downloaded in standard JSON, TSV or XML format for local programmatic processing,
+                individual entries can be accessed through our REST API, as detailed in the <a
+                    href="/download">Download section</a> or directly downloaded in the three mentioned formats on the top of each entry page.
+                Users are also presented with the option to select multiple entries on the <a
+                    href="/browser">"Browse/Search"</a> page and download them in the given formats.
+
+                <h5 class="mt-4">Annotate</h5>
+                <p class="text-justify">
+                    PhaSePro encourages community-based pooling of knowledge via enabling the submission of new LLPS
+                    proteins by users. The Annotate section offers two different means of communicating missing proteins
+                    to
+                    the database curators. The users can fill out the full annotation document for their candidate,
+                    providing all the information that will be featured on the entry page. As an alternative, they have
+                    the
+                    option to fill out a simplified submission form, providing only the basic information (the
+                    gene/protein
+                    name and literature reference(s) supporting the LLPS), based on which the database curators can
+                    create
+                    the final entry. In each case, the provided information is checked for quality and consistency with
+                    PhaSePro standards before inclusion in the PhaSePro core dataset.</p>
+
+                <h4 class="mt-4">List of abbreviations</h4>
+
+                LLPS - liquid-liquid phase separation<br>
+                SG - stress granule<br>
+                MO - membraneless organelle<br>
+                NMR - Nuclear magnetic resonance<br>
+                ITC - Isothermal titration calorimetry<br>
+                FISH - Fluorescence in situ hybridization<br>
+                FRAP - Fluorescence recovery after photobleaching<br>
+                FRET - Fluorescent/Förster resonance energy transfer<br>
+                GFP/YFP/CFP - green/yellow/cyan fluorescent protein<br>
+                siRNA/shRNA - small interfering/hairpin RNA<br>
+                DLS - Dynamic light scattering<br>
+                LC/LCD - Low-complexity/Low-complexity domain<br>
+                PLD/PrLD - Prion-like domain<br>
+                IDP/IDR - Intrinsically disordered protein/region<br>
+
+                <h4 class="mt-4">Controlled vocabularies used in LLPS definitions</h4>
+
+                <p class="text-justify">Membraneless organelles are linked to currently available cellular component
+                    terms in the Gene Ontology
+                    (GO). A more refined classification creating new terms is being introduced into GO, in order to more
+                    faithfully represent the heterogeneity of membraneless organelles.</p>
+                <p class="text-justify">Experimental procedures used for the study of liquid-liquid phase separation are
+                    defined as free text,
+                    enriched with cross-references to the Evidence and Conclusion Ontology (ECO). The use of GO and ECO
+                    are
+                    fully in line with the practices of core data resources, such as UniProt.</p>
+                <p class="text-justify">The functional class of the membraneless organelles (MOs) follow a controlled
+                    vocabulary created from
+                    the consensus of the proposed functional classification schemes detailed in the following
+                    publications:
+                    PMID:28808090, PMD:28864230, PMID:30826453, PMID:30682370.<br>PhaSePro currently uses the following
+                    8
+                    funcional classes:</p>
+                <ul>
+                    <li>activation/nucleation/signal amplification/bioreactor (MOs that activate reactions based on high
+                        local
+                        concentration of the components)
+                    </li>
+                    <li>inactivation/separation/molecular shield (MOs that inactivate reactions by sequestering some of
+                        the
+                        required components while keeping others outside)
+                    </li>
+                    <li>protective storage/reservoir (MOs that form to store/protect molecules in an inactive state for
+                        a
+                        certain period of time, eg. during stress)
+                    </li>
+                    <li>biomolecular filter/selectivity barrier (MOs whose primary function is the selective
+                        concentration of
+                        certain molecules)
+                    </li>
+                    <li>sensor (MOs which form/dissolve on environmental changes (pH, temperature, stress etc.) to
+                        signal them
+                        to the cell)
+                    </li>
+                    <li>regulator of spatial patterns (MOs which act as markers of cell polarity, e.g. help asymmetric
+                        cell
+                        divisions)
+                    </li>
+                    <li>memory device (MOs whose primary function is to act as long-lasting molecular footprints of past
+                        external/internal signals)
+                    </li>
+                    <li>mechanical property exploitation (MOs whose primary function is dependent on the
+                        mechanical/elastic
+                        properties of the condensate itself)
+                    </li>
+                </ul>
+                <p class="text-justify">Molecular interactions crucial to the formation of liquid condensates though
+                    LLPS are defined in the
+                    context of a purpose-built controlled vocabulary (CV). This CV is built on the review of Mittag et
+                    al.
+                    (PMID:30099026) containing the following terms:</p>
+                <ul>
+                    <li>multivalent domain-motif interactions (eg. SH3 domains and proline-rich motifs)</li>
+                    <li>multivalent domain-PTM interactions (eg. SH2 domain - pY, UBA domain - ubiquitin, domains
+                        recognising histones with specific modifications)
+                    </li>
+                    <li>discrete oligomerization (via ordinary oligomerization domains; defined number of
+                        monomers/valency)
+                    </li>
+                    <li>linear oligomerization/self-association (undefined number of monomers/valency)</li>
+                    <li>coiled-coil formation</li>
+                    <li>helix-helix interaction driven oligomerization (e.g. formation of helical bundles)</li>
+                    <li>prion-like aggregation (typically Q/N rich regions)</li>
+                    <li>formation of amyloid-like/cross-beta/kinked/stacked beta-sheet structures</li>
+                    <li>protein-RNA interaction (often multivalent)</li>
+                    <li>protein-RNA interaction (often multivalent)</li>
+                    <li>protein-DNA interaction (often multivalent)</li>
+                    <li>simple coacervation of hydrophobic residues</li>
+                    <li>complex coacervation (IDRs with high net charge and large global dimensions form condensed
+                        droplets with
+                        oppositely charged polymers)
+                    </li>
+                    <li>electrostatic (cation-anion) interaction (typically claimed when blocks of opposite charges
+                        alternate)
+                    </li>
+                    <li>cation-π (cation-pi) interactions</li>
+                    <li>π-π (pi-pi) interactions</li>
+                    <li>dipole-dipole interactions</li>
+                    <li>RNA base pairing/RNA self-assembly</li>
+                    <li>weak electrostatic or hydrophobic interactions between folded domains (like Pab1 RRMs without
+                        RNA)
+                    </li>
+                    <li>gelation (formation of a system-spanning gel instead of condensed droplets)</li>
+                </ul>
+                <p>
+                    After comprehensive reading of the LLPS literature we came up with a custom-built CV that helps
+                    establish broad categories of LLPS cases based on the main molecular determinants and mechanisms
+                    that are pertinent to LLPS:
+                </p>
+                <ul>
+                    <li>Membrane cluster</li>
+                    <li>Partner-dependent</li>
+                    <li>RNA-dependent</li>
+                    <li>PTM required for LLPS</li>
+                    <li>Domain-motif interactions involved</li>
+                    <li>Discrete oligomerization involved</li>
+                </ul>
+
+                <p class="text-justify">The experimental observations supporting the liquid state of the condensates are
+                    defined using terms in
+                    a separate controlled vocabulary, built on the review of Mitrea et al (PMID:30017918), and contains
+                    the
+                    following terms:</p>
+                <ul>
+                    <li>dynamic movement/reorganization of molecules within the droplet (e.g. FRAP, NMR)</li>
+                    <li>dynamic exchange of molecules with surrounding solvent</li>
+                    <li>morphological traits (e.g. round shape, fusion of droplets, wetting)</li>
+                    <li>rheological traits (material properties e.g. viscosity, surface tension, molecular network mesh
+                        size)
+                    </li>
+                    <li>sensitivity to 1,6-hexanediol</li>
+                    <li>Temperature-dependence</li>
+                    <li>reversibility of formation and dissolution (with changes in environmental conditions)</li>
+                    <li>other (none of the above, but supports the liquid material state)</li>
+                </ul>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    $('.pmid').each(function () {
+        articulator($(this))
+    });
+</script>
+
+
+<div class="container">
+    <hr>
+    <footer>
+        <div class="row">
+            <div class="col-11">
+                <span style="font-size: 12px">Bálint Mészáros, Gábor Erdős, Beáta Szabó, Éva Schád, Ágnes Tantos, Rawan
+Abukhairan, Tamás Horváth, Nikoletta Murvai, Orsolya P Kovács, Márton
+Kovács, Silvio C E Tosatto, Péter Tompa, Zsuzsanna Dosztányi, Rita Pancsa,
+PhaSePro: the database of proteins driving liquid–liquid phase separation,
+Nucleic Acids Research, gkz848, <a target="_blank" href="https://doi.org/10.1093/nar/gkz848">https://doi.org/10.1093/nar/gkz848</a></span>
+
+            </div>
+            <div class="col text-right my-auto">
+                <span style="font-size: 9px">v. 1.1.0</span>
+            </div>
+
+        </div>
+    </footer>
+</div>
+<script src="/static/bootstrap-4.3.1-dist/js/bootstrap.bundle.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-143102775-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-143102775-1');
+</script>
+
+</body>
+</html>

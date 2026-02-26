@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Sample detail · IDR-LLPS{% endblock %}
+
+{% block content %}
+  {% if not sample %}
+    <h2>Sample not found</h2>
+    <p class="text-muted">The requested sample_id could not be found in the database.</p>
+  {% else %}
+    <h2 class="mb-3">Sample {{ sample.sample_id }}</h2>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <table class="table table-sm">
+          <tbody>
+            <tr><th>protein_accession</th><td>{{ sample.protein_accession }}</td></tr>
+            <tr><th>gene_name</th><td>{{ sample.gene_name }}</td></tr>
+            <tr><th>organism</th><td>{{ sample.organism }}</td></tr>
+            <tr><th>taxon_id</th><td>{{ sample.taxon_id }}</td></tr>
+            <tr><th>taxon_group</th><td>{{ sample.taxon_group }}</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-6">
+        <table class="table table-sm">
+          <tbody>
+            <tr><th>label</th><td>{{ sample.label }}</td></tr>
+            <tr><th>label_source</th><td>{{ sample.label_source }}</td></tr>
+            <tr><th>region_start</th><td>{{ sample.region_start }}</td></tr>
+            <tr><th>region_end</th><td>{{ sample.region_end }}</td></tr>
+            <tr><th>idr_start</th><td>{{ sample.idr_start }}</td></tr>
+            <tr><th>idr_end</th><td>{{ sample.idr_end }}</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    {% if features %}
+      <h3 class="mt-4">NARDINI90 features</h3>
+      <p class="text-muted">
+        Showing compositional (<code>comp_*</code>) and patterning (<code>pat_*</code>) features for this sample.
+      </p>
+      <div class="table-responsive">
+        <table class="table table-sm table-striped">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for key, value in features.items() %}
+              {% if key.startswith("comp_") or key.startswith("pat_") %}
+                <tr>
+                  <td>{{ key }}</td>
+                  <td>{{ "%.4f"|format(value) }}</td>
+                </tr>
+              {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <p class="text-muted mt-4">
+        No NARDINI90 features found for this sample.
+      </p>
+    {% endif %}
+
+    <a href="/samples" class="btn btn-secondary mt-3">Back to samples</a>
+  {% endif %}
+{% endblock %}
+

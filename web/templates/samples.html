@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block title %}Samples · IDR-LLPS{% endblock %}
+
+{% block content %}
+  <h2 class="mb-3">Samples</h2>
+
+  <form class="row g-2 mb-3" method="get">
+    <div class="col-md-3">
+      <label for="label" class="form-label">Label</label>
+      <select id="label" name="label" class="form-select">
+        <option value="" {% if not label %}selected{% endif %}>All</option>
+        <option value="idr_pos" {% if label == "idr_pos" %}selected{% endif %}>idr_pos</option>
+        <option value="neg" {% if label == "neg" %}selected{% endif %}>neg</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <label for="label_source" class="form-label">Label source</label>
+      <select id="label_source" name="label_source" class="form-select">
+        <option value="" {% if not label_source %}selected{% endif %}>All</option>
+        <option value="experimental" {% if label_source == "experimental" %}selected{% endif %}>experimental</option>
+        <option value="exp_neg" {% if label_source == "exp_neg" %}selected{% endif %}>exp_neg</option>
+        <option value="pseudo_neg" {% if label_source == "pseudo_neg" %}selected{% endif %}>pseudo_neg</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <label for="taxon_group" class="form-label">Taxon group</label>
+      <input
+        id="taxon_group"
+        name="taxon_group"
+        class="form-control"
+        type="text"
+        value="{{ taxon_group }}"
+        placeholder="e.g. vertebrate"
+      />
+    </div>
+    <div class="col-md-3 d-flex align-items-end">
+      <button type="submit" class="btn btn-primary me-2">Filter</button>
+      <a href="/samples" class="btn btn-secondary">Reset</a>
+    </div>
+  </form>
+
+  <p class="text-muted">
+    Showing page {{ page }} of {{ total_pages }}, total {{ total }} samples.
+  </p>
+
+  <div class="table-responsive">
+    <table class="table table-sm table-striped align-middle">
+      <thead>
+        <tr>
+          <th>sample_id</th>
+          <th>protein_accession</th>
+          <th>gene_name</th>
+          <th>organism</th>
+          <th>label</th>
+          <th>label_source</th>
+          <th>taxon_group</th>
+          <th>region</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in rows %}
+          <tr>
+            <td>{{ r.sample_id }}</td>
+            <td>{{ r.protein_accession }}</td>
+            <td>{{ r.gene_name }}</td>
+            <td>{{ r.organism }}</td>
+            <td>{{ r.label }}</td>
+            <td>{{ r.label_source }}</td>
+            <td>{{ r.taxon_group }}</td>
+            <td>{{ r.region_start }}–{{ r.region_end }}</td>
+            <td>
+              <a href="/samples/{{ r.sample_id }}" class="btn btn-sm btn-outline-primary">Details</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <nav aria-label="pagination">
+    <ul class="pagination">
+      <li class="page-item {% if page <= 1 %}disabled{% endif %}">
+        <a class="page-link"
+           href="?label={{ label }}&label_source={{ label_source }}&taxon_group={{ taxon_group }}&page={{ page - 1 }}">
+          Previous
+        </a>
+      </li>
+      <li class="page-item disabled">
+        <span class="page-link">Page {{ page }} / {{ total_pages }}</span>
+      </li>
+      <li class="page-item {% if page >= total_pages %}disabled{% endif %}">
+        <a class="page-link"
+           href="?label={{ label }}&label_source={{ label_source }}&taxon_group={{ taxon_group }}&page={{ page + 1 }}">
+          Next
+        </a>
+      </li>
+    </ul>
+  </nav>
+{% endblock %}
+

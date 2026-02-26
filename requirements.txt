@@ -1,0 +1,12 @@
+pyyaml
+numpy
+scipy
+pandas
+matplotlib
+seaborn
+umap-learn
+scikit-learn
+# Web app dependencies
+fastapi
+uvicorn[standard]
+jinja2
