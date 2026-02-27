@@ -49,6 +49,7 @@ def list_samples(
               organism,
               label,
               label_source,
+              source_dbs,
               taxon_group,
               region_start,
               region_end
