@@ -56,9 +56,13 @@
 - `reports/figures/charge_features_by_label.png`
 - `reports/figures/group_counts.png`
 - `reports/figures/idr_pca_kmeans.png`
+- `reports/figures/idr_pca_kmeans_pos_neg_only.png`
 - `reports/figures/idr_pca_pos_neg.png`
+- `reports/figures/idr_pca_pos_neg_pos_neg_only.png`
 - `reports/figures/idr_tsne_kmeans.png`
+- `reports/figures/idr_tsne_kmeans_pos_neg_only.png`
 - `reports/figures/idr_tsne_pos_neg.png`
+- `reports/figures/idr_tsne_pos_neg_pos_neg_only.png`
 - `reports/figures/label_counts.png`
 - `reports/figures/label_source_counts.png`
 - `reports/figures/length_bins_idr_regions.png`

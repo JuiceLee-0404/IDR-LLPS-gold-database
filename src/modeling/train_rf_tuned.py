@@ -38,6 +38,11 @@ def main() -> None:
     parser.add_argument("--train-file", default="data/processed/balanced_nardini90_train.tsv")
     parser.add_argument("--test-file", default="data/processed/balanced_nardini90_test.tsv")
     parser.add_argument("--metrics-file", default="reports/rf_tuned_metrics.json")
+    parser.add_argument(
+        "--preds-file",
+        default="",
+        help="Optional TSV to write test-set predictions (llps_label, prob_rf, pred_rf).",
+    )
     args = parser.parse_args()
 
     train_df = pd.read_csv(args.train_file, sep="\t")
@@ -74,6 +79,17 @@ def main() -> None:
     y_prob = best_rf.predict_proba(x_test)[:, 1]
     y_pred = (y_prob >= 0.5).astype(int)
     test_metrics = evaluate(y_test, y_pred, y_prob)
+
+    # Optionally write per-sample test predictions for downstream analysis
+    if args.preds_file:
+        preds_out = test_df.copy()
+        preds_out["llps_label"] = y_test
+        preds_out["prob_rf"] = y_prob
+        preds_out["pred_rf"] = y_pred
+        preds_path = Path(args.preds_file)
+        preds_path.parent.mkdir(parents=True, exist_ok=True)
+        preds_out.to_csv(preds_path, sep="\t", index=False)
+        print(f"Wrote test-set predictions to: {preds_path}")
 
     out = Path(args.metrics_file)
     out.parent.mkdir(parents=True, exist_ok=True)
