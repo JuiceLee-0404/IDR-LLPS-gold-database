@@ -5,87 +5,21 @@
 {% block content %}
   <h2 class="mb-3">Plots &amp; ML Results</h2>
 
-  <h4>IDR statistics</h4>
+  <h4>All figures in reports/figures</h4>
+  {% if report_figures %}
   <div class="row row-cols-1 row-cols-md-2 g-3 mb-4">
-    <div class="col">
-      <div class="card">
-        <div class="card-header">PCA (pos / neg / neg_pseudo)</div>
-        <img src="/reports/figures/idr_pca_pos_neg.svg" class="card-img-top" alt="PCA pos/neg/neg_pseudo" />
+    {% for fig in report_figures %}
+      <div class="col">
+        <div class="card">
+          <div class="card-header">{{ fig.title }}</div>
+          <img src="{{ fig.src }}" class="card-img-top" alt="{{ fig.name }}" loading="lazy" />
+        </div>
       </div>
-    </div>
-    <div class="col">
-      <div class="card">
-        <div class="card-header">t-SNE (pos / neg / neg_pseudo)</div>
-        <img src="/reports/figures/idr_tsne_pos_neg.svg" class="card-img-top" alt="t-SNE pos/neg/neg_pseudo" />
-      </div>
-    </div>
-    <div class="col">
-      <div class="card">
-        <div class="card-header">PCA (pos / neg only)</div>
-        <img src="/reports/figures/idr_pca_pos_neg_pos_neg_only.svg" class="card-img-top" alt="PCA pos/neg only" />
-      </div>
-    </div>
-    <div class="col">
-      <div class="card">
-        <div class="card-header">t-SNE (pos / neg only)</div>
-        <img src="/reports/figures/idr_tsne_pos_neg_pos_neg_only.svg" class="card-img-top" alt="t-SNE pos/neg only" />
-      </div>
-    </div>
-    <div class="col">
-      <div class="card">
-        <div class="card-header">AA frequency (all IDRs)</div>
-        <img src="/reports/figures/aa_frequency_idr_regions.png" class="card-img-top" alt="AA frequency in IDR regions" />
-      </div>
-    </div>
-    <div class="col">
-      <div class="card">
-        <div class="card-header">AA group fraction by label</div>
-        <img src="/reports/figures/aa_group_fraction_by_label.png" class="card-img-top" alt="AA group fraction by label" />
-      </div>
-    </div>
-    <div class="col">
-      <div class="card">
-        <div class="card-header">AA log2FC (pos vs neg)</div>
-        <img src="/reports/figures/aa_log2fc_pos_vs_neg.png" class="card-img-top" alt="AA log2FC pos vs neg" />
-      </div>
-    </div>
-    <div class="col">
-      <div class="card">
-        <div class="card-header">AA log2FC (pos vs neg_pseudo)</div>
-        <img src="/reports/figures/aa_log2fc_pos_vs_neg_pseudo.png" class="card-img-top" alt="AA log2FC pos vs neg_pseudo" />
-      </div>
-    </div>
-    <div class="col">
-      <div class="card">
-        <div class="card-header">Charge & pattern features by label</div>
-        <img src="/reports/figures/charge_features_by_label.png" class="card-img-top" alt="Charge features by label" />
-      </div>
-    </div>
-    <div class="col">
-      <div class="card">
-        <div class="card-header">IDR length distribution</div>
-        <img src="/reports/figures/length_distribution_idr_regions.png" class="card-img-top" alt="Length distribution of IDR regions" />
-      </div>
-    </div>
-    <div class="col">
-      <div class="card">
-        <div class="card-header">Sample length distribution by label</div>
-        <img src="/reports/figures/length_distribution_samples_by_label.png" class="card-img-top" alt="Length distribution of samples by label" />
-      </div>
-    </div>
-    <div class="col">
-      <div class="card">
-        <div class="card-header">Source DB contribution</div>
-        <img src="/reports/figures/source_db_contribution.png" class="card-img-top" alt="Source database contribution" />
-      </div>
-    </div>
-    <div class="col">
-      <div class="card">
-        <div class="card-header">Taxon group counts (samples)</div>
-        <img src="/reports/figures/taxon_group_samples.png" class="card-img-top" alt="Taxon group samples" />
-      </div>
-    </div>
+    {% endfor %}
   </div>
+  {% else %}
+  <p class="text-muted mb-4">No figures found in <code>reports/figures</code>.</p>
+  {% endif %}
 
   <h4>ML baselines (balanced absolute pos/neg)</h4>
   <div class="row row-cols-1 row-cols-md-2 g-3 mb-4">

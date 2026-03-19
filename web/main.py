@@ -11,6 +11,7 @@ from web import db
 
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
+FIGURE_EXTENSIONS = {".svg", ".png", ".jpg", ".jpeg", ".webp", ".gif"}
 
 app = FastAPI(title="IDR-LLPS Database")
 
@@ -99,10 +100,25 @@ async def sample_detail(request: Request, sample_id: str) -> HTMLResponse:
 
 @app.get("/plots", response_class=HTMLResponse)
 async def plots_page(request: Request) -> HTMLResponse:
+    figures_dir = ROOT_DIR / "reports" / "figures"
+    report_figures: list[dict[str, str]] = []
+    if figures_dir.exists():
+        for path in sorted(figures_dir.iterdir()):
+            if not path.is_file() or path.suffix.lower() not in FIGURE_EXTENSIONS:
+                continue
+            report_figures.append(
+                {
+                    "src": f"/reports/figures/{path.name}",
+                    "name": path.name,
+                    "title": path.stem.replace("_", " "),
+                }
+            )
+
     return templates.TemplateResponse(
         "plots.html",
         {
             "request": request,
+            "report_figures": report_figures,
         },
     )
 
