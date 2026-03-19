@@ -12,6 +12,7 @@ from web import db
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 FIGURE_EXTENSIONS = {".svg", ".png", ".jpg", ".jpeg", ".webp", ".gif"}
+FIGURE_PRIORITY = [".svg", ".png", ".jpg", ".jpeg", ".webp", ".gif"]
 
 app = FastAPI(title="IDR-LLPS Database")
 
@@ -101,18 +102,36 @@ async def sample_detail(request: Request, sample_id: str) -> HTMLResponse:
 @app.get("/plots", response_class=HTMLResponse)
 async def plots_page(request: Request) -> HTMLResponse:
     figures_dir = ROOT_DIR / "reports" / "figures"
-    report_figures: list[dict[str, str]] = []
+    # dedupe by stem, prefer vector formats (svg) over png/jpg, etc.
+    by_stem: dict[str, Path] = {}
     if figures_dir.exists():
-        for path in sorted(figures_dir.iterdir()):
+        for path in figures_dir.iterdir():
             if not path.is_file() or path.suffix.lower() not in FIGURE_EXTENSIONS:
                 continue
-            report_figures.append(
-                {
-                    "src": f"/reports/figures/{path.name}",
-                    "name": path.name,
-                    "title": path.stem.replace("_", " "),
-                }
-            )
+            # normalize key to avoid duplicates caused by case/spacing variants.
+            stem = path.stem
+            key = stem.lower().replace(" ", "_").replace("-", "_")
+            current = by_stem.get(key)
+            if current is None:
+                by_stem[key] = path
+                continue
+            # choose better extension according to FIGURE_PRIORITY
+            def _score(p: Path) -> int:
+                suffix = p.suffix.lower()
+                return FIGURE_PRIORITY.index(suffix) if suffix in FIGURE_PRIORITY else len(FIGURE_PRIORITY)
+
+            if _score(path) < _score(current):
+                by_stem[key] = path
+
+    report_figures: list[dict[str, str]] = []
+    for _, path in sorted(by_stem.items(), key=lambda kv: kv[0]):
+        report_figures.append(
+            {
+                "src": f"/reports/figures/{path.name}",
+                "name": path.name,
+                "title": path.stem.replace("_", " "),
+            }
+        )
 
     return templates.TemplateResponse(
         "plots.html",
