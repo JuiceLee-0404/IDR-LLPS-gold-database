@@ -126,5 +126,85 @@
       </div>
     </div>
   </div>
+
+  <h4>IDR-only RandomForest (IDR_TRAIN)</h4>
+  <div class="row row-cols-1 row-cols-md-2 g-3 mb-4">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">Confusion matrix – IDR-only RF</div>
+        <img src="/ml_results/IDR_TRAIN/cm_rf_idr_only.svg" class="card-img-top" alt="cm_rf_idr_only" />
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-header">ROC – IDR-only RF</div>
+        <img src="/ml_results/IDR_TRAIN/roc_rf_idr_only.svg" class="card-img-top" alt="roc_rf_idr_only" />
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-header">Precision–Recall – IDR-only RF</div>
+        <img src="/ml_results/IDR_TRAIN/pr_rf_idr_only.svg" class="card-img-top" alt="pr_rf_idr_only" />
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-header">Score reliability curve</div>
+        <img src="/ml_results/IDR_TRAIN/SCORE/score_reliability_curve.svg" class="card-img-top" alt="score_reliability_curve" />
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-header">Precision–Recall vs threshold</div>
+        <img src="/ml_results/IDR_TRAIN/SCORE/precision_recall_vs_threshold.svg" class="card-img-top" alt="precision_recall_vs_threshold" />
+      </div>
+    </div>
+  </div>
+
+  <h4>STARLING GNN + RF ensemble</h4>
+  <div class="row row-cols-1 row-cols-md-2 g-3 mb-4">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">Confusion matrix – ensemble</div>
+        <img src="/ml_results/STARLING_GNN/figures/ensemble_cm.svg" class="card-img-top" alt="ensemble_cm" />
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-header">ROC – ensemble</div>
+        <img src="/ml_results/STARLING_GNN/figures/ensemble_roc.svg" class="card-img-top" alt="ensemble_roc" />
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-header">Precision–Recall – ensemble</div>
+        <img src="/ml_results/STARLING_GNN/figures/ensemble_pr.svg" class="card-img-top" alt="ensemble_pr" />
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-header">GNN vs RF scores</div>
+        <img src="/ml_results/STARLING_GNN/figures/ensemble_scatter_gnn_vs_rf.svg" class="card-img-top" alt="ensemble_scatter_gnn_vs_rf" />
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-header">Metric comparison</div>
+        <img src="/ml_results/STARLING_GNN/figures/ensemble_metrics_compare.svg" class="card-img-top" alt="ensemble_metrics_compare" />
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-header">Ensemble parameters</div>
+        <img src="/ml_results/STARLING_GNN/figures/ensemble_params.svg" class="card-img-top" alt="ensemble_params" />
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-header">Predicted score distribution by label</div>
+        <img src="/ml_results/STARLING_GNN/figures/ensemble_probs_by_label.svg" class="card-img-top" alt="ensemble_probs_by_label" />
+      </div>
+    </div>
+  </div>
 {% endblock %}
 
