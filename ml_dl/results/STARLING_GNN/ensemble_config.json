@@ -1,0 +1,11 @@
+{
+  "gnn_folds_used": [
+    1
+  ],
+  "gnn_ckpt_names": [
+    "starling_gnn_fold1_20260302_101425.pt"
+  ],
+  "edge_dist": true,
+  "feature_cols_count": 90,
+  "meta_type": "lr"
+}

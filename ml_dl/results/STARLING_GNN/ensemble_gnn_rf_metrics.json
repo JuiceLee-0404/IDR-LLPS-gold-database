@@ -1,0 +1,30 @@
+{
+  "ensemble": "gnn_rf_meta",
+  "gnn_folds_used": [
+    1
+  ],
+  "gnn_ckpts": [
+    "starling_gnn_fold1_20260302_101425.pt"
+  ],
+  "meta_type": "lr",
+  "test_metrics": {
+    "accuracy": 0.8904109589041096,
+    "balanced_accuracy": 0.8879699248120301,
+    "precision": 0.9354838709677419,
+    "recall": 0.8285714285714286,
+    "f1": 0.8787878787878788,
+    "roc_auc": 0.9315789473684211,
+    "pr_auc": 0.9313287793250423
+  },
+  "n_train_ensemble": 265,
+  "n_test_ensemble": 73,
+  "meta_coef": [
+    [
+      1.684338036210837,
+      6.400045629115913
+    ]
+  ],
+  "meta_intercept": [
+    -4.004665208880076
+  ]
+}
